@@ -9,7 +9,7 @@
             <!-- Aquí va el contenido de tu modal -->
         </x-slot>
         <x-slot name="footer">
-            <!-- Aquí va el pie de tu modal -->
+            <button wire:click="$set('open', false)" class="mt-6 bg-gray-300 px-5 rounded-lg font-semibold text-lg text-gray-600">Cerrar</button>
         </x-slot>
     </x-dialog-modal>
 </div>
