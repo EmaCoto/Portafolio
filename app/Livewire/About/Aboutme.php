@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Aboutme extends Component
 {
-    public $open = false;
+    public $open = true;
     public function render()
     {
         return view('livewire.about.aboutme');
