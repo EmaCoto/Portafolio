@@ -1,11 +1,10 @@
 <x-guest-layout>
     {{-- NAV --}}
-     <nav class="grid grid-cols-2 top-0 sticky bg-white w-full px-14 py-5 z-50">
+     <nav class="grid grid-cols-2 top-0 sticky bg-white w-full px-14 py-5 z-50 shadow-lg">
         <div class="flex items-center">
             <a href="{{ route('home') }}" class="group">
                 <img src="{{ asset("img/my_photo.png") }}" alt="photo" class="size-12 rounded-full"> {{-- Editar que la imagen sea redonda --}}
-                <a class="group font-bold mx-5 text-lg relative overflow-hidden">Emanuel Cortes Ochoa<span class="absolute h-0.5 bg-[#65B741] bottom-0 left-0 w-1/2 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-200 ease-in-out"></span>
-                </a>
+                <a href="{{ route('home') }}" class="group font-bold mx-5 text-lg relative overflow-hidden">Emanuel Cortes Ochoa<span class="absolute h-0.5 bg-[#65B741] bottom-0 left-0 w-1/2 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-200 ease-in-out"></span></a>
             </a>
         </div>
         <div class="flex items-center justify-around">
@@ -15,8 +14,8 @@
         </div>
      </nav>
     {{-- DESCRIPTION --}}
-     <div class="h-[84vh] flex flex-col justify-center px-14 py-5">
-        <div class="bg-black text-white bg-opacity-80 py-24 px-3 rounded-lg shadow-lg shadow-gray-600">
+     <div  id="contenedor" class="h-[84vh] flex flex-col justify-center px-14 py-5">
+        <div class="bg-black bg-opacity-90 text-white  py-24 px-3 rounded-lg shadow-lg shadow-gray-600">
             <h3 class="uppercase text-lg">¡Hola! soy emanuel</h3>
             <h2 class="text-6xl font-bold">Desarrollador <span class="text-[#65B741]">full-stack</span></h2>
             <h2 class="text-2xl">Un apasionado desarrollador web con experiencia en la creación de aplicaciones elegantes y dinámicas</h2>

@@ -5,3 +5,31 @@
 [x-cloak] {
     display: none;
 }
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+  }
+  .estela {
+    z-index: -20;
+    position: absolute;
+    background-color: #65B741;
+    width: 20px;
+    height: 20px;
+    border-radius: ;
+    background-color: rgba(0, 128, 0, 0.05); /* Color de la estela */
+    pointer-events: none;
+  }
+
+  .cuadro {
+    z-index: -20;
+    position: absolute;
+    background-color: #65B741;
+    width: 20px;
+    height: 20px;
+    border-radius: ;
+    background-color: rgba(0, 128, 0); /* Color de la estela */
+    pointer-events: none;
+  }
