@@ -27,7 +27,7 @@ function moverCuadro(cuadro) {
   let y = -20; // Comienza fuera de la pantalla arriba
   let x = parseFloat(cuadro.style.left); // Posición horizontal actual
   let velocidadY = 6; // Velocidad en Y entre 1 y 4 pixels por frame
-  let stopY = window.innerHeight - 50; // Posición de parada a unos 50 píxeles antes del borde inferior
+  let stopY = window.innerHeight - 25; // Posición de parada a unos 50 píxeles antes del borde inferior
 
 
   const animacion = () => {

@@ -13,7 +13,7 @@
     overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
   }
   .estela {
-    z-index: -20;
+    z-index: 0;
     position: absolute;
     background-color: #65B741;
     width: 20px;
@@ -24,7 +24,7 @@
   }
 
   .cuadro {
-    z-index: -20;
+    z-index: 0;
     position: absolute;
     background-color: #65B741;
     width: 20px;
