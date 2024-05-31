@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class FirstProject extends Component
 {
-    public $open = true;
+    public $open = false;
     public function render()
     {
         return view('livewire.projects.first-project');

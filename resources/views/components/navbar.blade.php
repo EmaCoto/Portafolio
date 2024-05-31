@@ -1,5 +1,5 @@
-<x-guest-layout>
-    {{-- NAV --}}
+<div>
+    <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
     <nav class="grid grid-cols-2 top-0 sticky bg-[#111111] w-full px-14 py-5 z-50 shadow-md shadow-black">
         <div class="flex items-center">
             <a href="{{ route('home') }}" class="group">
@@ -12,27 +12,6 @@
             <a href="#projects" class="group relative overflow-hidden">Proyectos <span class="absolute h-0.5 bg-[#65B741] bottom-0 left-0 w-1/2 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-200 ease-in-out"></span></a>
             <livewire:about.aboutme />
             <livewire:contact.contact-me />
-        </div>
+        </div> 
      </nav>
-
-    {{-- DESCRIPTION --}}
-    <x-description/>
-
-    {{-- TECHNOLOGIES --}}
-    <x-technologies/>
-    {{-- PROJECTS --}}
-    <div id="projects" class="px-14 py-5">
-        <h1 class="text-center w-full uppercase text-2xl font-semibold mb-10">Proyectos</h1>
-        <div class="grid  text-center mx-auto">
-            ¡SE ESTAN HACIENDO MEJORAS EN LOS PROYECTOS PRONTO ESTARÁN NUEVAMENTE DISPONIBLES!
-            {{-- <livewire:projects.first-project>
-            <livewire:projects.second-project>
-            <livewire:projects.third-project>
-            <livewire:projects.fourth-project> --}}
-        </div>
-        <div class="grid  mt-6">
-        </div>
-    </div>
-    {{-- FOOTER --}}
-    <x-footer />
-</x-guest-layout>
+</div>
