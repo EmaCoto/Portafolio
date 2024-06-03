@@ -1,9 +1,13 @@
-# Colors
-Dark: #0F0F0F
-Gray: #232D3F
-Green: #005B41
-Skyblue: #008170
+# Método mágico
 
-<!--  -->
+<!-- controlador de livewire -->
+public $open = true;
+
+<!-- html -->
+<button wire:click = "$toggle('open')"> 
+    ocultar/mostrar
+</button>
+
+if($open)
 
 

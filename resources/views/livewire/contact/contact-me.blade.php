@@ -1,6 +1,6 @@
 <div>
     {{-- Do your work, then step back. --}}
-    <button wire:click="$set('open', true)" class="group relative overflow-hidden">Contáctame <span class="absolute h-0.5 bg-[#65B741] bottom-0 left-0 w-1/2 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-200 ease-in-out"></span></button>
+    <button wire:click="$toggle('open')" class="group relative overflow-hidden">Contáctame <span class="absolute h-0.5 bg-[#65B741] bottom-0 left-0 w-1/2 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-200 ease-in-out"></span></button>
 
     <x-dialog-modal wire:model="open" maxWidth="6xl">
         <x-slot name="title" >
@@ -9,12 +9,12 @@
         <x-slot name="content">
             <div class="w-[75%] mx-auto border-b-2 pb-5">
                 <div>
-                    <x-label for="name" class="text-black font-bold">Nombre:</x-label>
+                    <x-label for="name">Nombre:</x-label>
                     <x-input type="text" placeholder="Escribe tu nombre" />
                 </div>
                 <div class="flex">
                     <div class="w-[25%] mr-2">
-                        <x-label for="name" class="text-black font-bold">¿Es oferta laboral?</x-label>
+                        <x-label for="name">¿Es oferta laboral?</x-label>
                         <select class="py-[1px] px-[12px] bg-gray-200 focus:bg-gray-50 border-2 border-gray-300 focus:border-[#65B741] focus:ring-0 rounded-md shadow-sm w-full h-8">
                             <option value="" disabled selected>Seleccionar</option>
                             <option value="si">Sí</option>
@@ -22,16 +22,16 @@
                         </select>
                     </div>
                     <div class="w-[75%] ml-2">
-                        <x-label for="name" class="text-black font-bold">Cargo:</x-label>
+                        <x-label for="name">Cargo:</x-label>
                         <x-input type="text" placeholder="Función a desempeñar" class="flex flex-col"/>
                     </div>
                 </div>
                 <div>
-                    <x-label for="phone" class="text-black font-bold">Déjame tu número:</x-label>
+                    <x-label for="phone">Déjame tu número:</x-label>
                     <x-input type="number" placeholder="Escribe tu nombre" />
                 </div>
                 <div>
-                    <x-label for="info" class="text-black font-bold">Información:</x-label>
+                    <x-label for="info">Información:</x-label>
                     <textarea name="info" id="info" class="bg-gray-200 focus:bg-gray-50 border-2 border-gray-300 focus:border-[#65B741] focus:ring-0 rounded-md shadow-sm w-full h-20" placeholder="Puedes dejarme más información"></textarea>
                 </div>
                 <div class="w-full flex justify-center mt-2">

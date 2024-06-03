@@ -21,14 +21,14 @@
     {{-- TECHNOLOGIES --}}
     <x-technologies/>
     {{-- PROJECTS --}}
-    <div id="projects" class="px-14 py-5">
+    <div id="projects" class="px-14 py-5 relative">
         <h1 class="text-center w-full uppercase text-2xl font-semibold mb-10">Proyectos</h1>
-        <div class="grid  text-center mx-auto">
-            ¡SE ESTAN HACIENDO MEJORAS EN LOS PROYECTOS PRONTO ESTARÁN NUEVAMENTE DISPONIBLES!
-            {{-- <livewire:projects.first-project>
-            <livewire:projects.second-project>
+        <div class="grid grid-cols-4 text-center mx-auto">
+            {{-- ¡SE ESTAN HACIENDO MEJORAS EN LOS PROYECTOS PRONTO ESTARÁN NUEVAMENTE DISPONIBLES! --}}
+            <livewire:projects.first-project>
+            <livewire:projects.second-project.second-project>
             <livewire:projects.third-project>
-            <livewire:projects.fourth-project> --}}
+            <livewire:projects.fourth-project>
         </div>
         <div class="grid  mt-6">
         </div>

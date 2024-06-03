@@ -32,3 +32,16 @@
     background-color: rgba(0, 128, 0); /* Color de la estela */
     pointer-events: none;
   }
+
+
+  
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
