@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class SecondProject extends Component
 {
     use WithPagination;
-    public $open = true;
+    public $open = false;
     public $datatables;
     #[On('render')]
 
