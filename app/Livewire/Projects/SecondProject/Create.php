@@ -7,14 +7,15 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public $open = true;
-    public $name, $age, $document, $email;
+    public $open = false;
+    public $datatable, $name, $age, $document, $email;
 
     public function save(){
 
         Datatable::create($this->only('name', 'age', 'document', 'email'));
-        $this->reset('name', 'age', 'document', 'email');
-        // $this->dispatch('mount');
+        $this->reset('name', 'age', 'document', 'email', 'open');
+        $this->dispatch('render');
+
     }
     public function render()
     {

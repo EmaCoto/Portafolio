@@ -6,8 +6,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Emanuel Cortés</title>
+        <link rel="icon" href="{{ asset('img/my_photo.png') }}" type="image/x-icon">
 
-        <!-- Fonts -->
+        <!-- Fonts -->      
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

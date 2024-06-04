@@ -17,7 +17,10 @@ class DatatableFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'age' => $this->faker->numberBetween(18, 65),
+            'document' => $this->faker->numberBetween(18, 65),
+            'email' => $this->faker->unique()->safeEmail,
         ];
     }
 }
