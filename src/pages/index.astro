@@ -1,0 +1,18 @@
+---
+import BlogCarousel from '../components/BlogCarousel.astro';
+import Education from '../components/Education.astro';
+import HomeInfo from '../components/HomeInfo.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Layout from '../layouts/Layout.astro';
+
+const title = "Portafolio | Home"
+---
+
+<Layout title={title}>
+	<HomeInfo />
+	<Skills />
+	<Projects />
+	<Education />
+	<BlogCarousel />
+</Layout>

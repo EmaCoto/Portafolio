@@ -1,0 +1,85 @@
+---
+import TitleSecundary from "./TitleSecundary.astro";
+
+// Skills.astro - Usando la misma lista y nombres de clases que la Navbar
+const skills = [
+  { name: "Astro", icon: "devicon-astro-plain" },
+  { name: "Tailwind", icon: "devicon-tailwindcss-original" },
+  { name: "JavaScript", icon: "devicon-javascript-plain" },
+  { name: "PHP", icon: "devicon-php-plain" },
+  { name: "Laravel", icon: "devicon-laravel-plain" },
+  { name: "WordPress", icon: "devicon-wordpress-plain" },
+  { name: "GitHub", icon: "devicon-github-original" },
+  { name: "SQL", icon: "devicon-mysql-plain" },
+  { name: "Search Console", icon: "devicon-google-plain" },
+  { name: "Optimización", icon: "devicon-chrome-plain" },
+  { name: "SEO", icon: "devicon-google-plain" },
+];
+
+const doubleSkills = [...skills, ...skills];
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+<section class="bg-[#0a0709] overflow-hidden py-20">
+  <TitleSecundary h2="Conocimientos" span="Stack Tecnológico"/>
+
+  <div class="relative flex overflow-x-hidden group/marquee mt-10">
+    <div class="py-12 animate-marquee flex whitespace-nowrap gap-12 items-center main-marquee">
+      {doubleSkills.map((skill) => (
+        <div class="skill-card relative flex flex-col items-center justify-center min-w-30 md:min-w-40 transition-all duration-500">
+          <i class={`${skill.icon} skill-icon text-5xl md:text-7xl transition-all duration-500`}></i>
+          
+          <span class="skill-name absolute -bottom-4 text-[#72bf78] font-mono text-[10px] uppercase tracking-[0.3em] opacity-0 transition-all duration-300 whitespace-nowrap">
+            {skill.name}
+          </span>
+        </div>
+      ))}
+    </div>
+
+    <div class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-linear-to-r from-[#0a0709] to-transparent z-10"></div>
+    <div class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-linear-to-l from-[#0a0709] to-transparent z-10"></div>
+  </div>
+</section>
+
+<style>
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+
+  /* Pausar al hacer hover general */
+  .group/marquee:hover .animate-marquee {
+    animation-play-state: paused;
+  }
+
+  /* 1. Por defecto: Grisáceos y sutiles */
+  .skill-icon {
+    color: rgba(255, 255, 255, 0.2);
+    filter: grayscale(1);
+  }
+
+  /* 2. Al entrar al área, todos se apagan más */
+  .main-marquee:hover .skill-icon {
+    opacity: 0.3;
+    filter: grayscale(1) blur(2px);
+  }
+
+  /* 3. El elemento seleccionado cobra vida en tu verde neón */
+  .skill-card:hover .skill-icon {
+    color: #72bf78;
+    opacity: 1 !important;
+    filter: grayscale(0) blur(0px) drop-shadow(0 0 15px rgba(114, 191, 120, 0.4));
+    transform: scale(1.2);
+  }
+
+  /* Nombre de la skill */
+  .skill-card:hover .skill-name {
+    opacity: 1;
+    transform: translateY(10px);
+  }
+</style>

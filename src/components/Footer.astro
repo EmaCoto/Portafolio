@@ -1,0 +1,119 @@
+---
+const currentYear = new Date().getFullYear();
+
+const socialLinks = [
+  { name: "LinkedIn", url: "#", icon: "devicon-linkedin-plain" },
+  { name: "GitHub", url: "#", icon: "devicon-github-original" },
+  { name: "Twitter / X", url: "#", icon: "devicon-twitter-original" },
+];
+
+const quickLinks = [
+  { name: "Inicio", url: "/", id: "footer-home" }, // Añadimos ID para el script
+  { name: "Proyectos", url: "/proyectos" },
+  { name: "Conocimientos", url: "/conocimientos" },
+  { name: "Blog", url: "/blog" },
+];
+---
+
+<footer class="bg-[#0a0709] pt-20 pb-10 border-t border-white/5 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 pb-16 border-b border-white/5">
+      <div class="max-w-md">
+        <h2 class="text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter leading-none mb-6">
+          ¿Tienes un proyecto <span class="text-[#72bf78]">en mente?</span>
+        </h2>
+        <a href="mailto:tuemail@ejemplo.com" class="group flex items-center gap-4 text-white/40 hover:text-[#72bf78] transition-colors duration-500">
+          <span class="font-mono text-sm tracking-[0.3em] uppercase">Hablemos ahora</span>
+          <div class="w-12 h-px bg-[#72bf78] group-hover:w-20 transition-all"></div>
+        </a>
+      </div>
+
+      <div class="flex flex-col items-start md:items-end">
+        <a href="/" id="footer-logo" class="group flex items-center gap-3 mb-4 cursor-none">
+          <div class="w-12 h-12 bg-[#72bf78] rounded-xl flex items-center justify-center -rotate-3 group-hover:rotate-12 transition-all">
+            <span class="text-[#0a0709] font-black text-2xl">E</span>
+          </div>
+          <span class="text-white font-black tracking-tighter text-2xl uppercase italic">Emanuel<span class="text-[#72bf78]">.</span></span>
+        </a>
+        <p class="text-white/30 font-mono text-[10px] uppercase tracking-widest text-left md:text-right leading-relaxed">
+          Desarrollador Web & <br/>Especialista en SEO Técnico.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 py-16">
+      <div class="flex flex-col gap-4">
+        <h3 class="footer-title">Navegación</h3>
+        {quickLinks.map(link => (
+          <a href={link.url} id={link.id} class="footer-link">{link.name}</a>
+        ))}
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="footer-title">Redes Sociales</h3>
+        {socialLinks.map(social => (
+          <a href={social.url} target="_blank" class="footer-link flex items-center gap-2">
+             <i class={`${social.icon} text-sm`}></i>
+             {social.name}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="footer-title">Contacto</h3>
+        <span class="footer-text italic">Colombia, Medellín</span>
+        <span class="footer-text">emanuel@tuweb.com</span>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="footer-title">Stack Favorito</h3>
+        <div class="flex flex-wrap gap-3">
+          <i class="devicon-astro-plain text-xl text-white/70 hover:text-[#72bf78] transition-colors"></i>
+          <i class="devicon-laravel-plain text-xl text-white/70 hover:text-[#72bf78] transition-colors"></i>
+          <i class="devicon-tailwindcss-original text-xl text-white/70 hover:text-[#72bf78] transition-colors"></i>
+          <i class="devicon-mysql-plain text-xl text-white/70 hover:text-[#72bf78] transition-colors"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5">
+      <p class="text-white/20 font-mono text-[9px] uppercase tracking-[0.2em]">
+        © {currentYear} Emanuel. Todos los derechos reservados.
+      </p>
+      
+      <div class="flex items-center gap-8">
+        <a href="#" class="text-white/20 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-white transition-colors">Privacidad</a>
+        <a href="#" class="text-white/20 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-white transition-colors">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  @reference "../style/global.css";
+
+  .footer-title {
+    @apply text-white font-mono text-[10px] uppercase tracking-[0.3em] mb-4;
+  }
+  .footer-link {
+    @apply text-white/70 text-sm font-light hover:text-[#72bf78] transition-all duration-300 w-fit cursor-none;
+  }
+  .footer-text {
+    @apply text-white/70 text-sm font-light;
+  }
+</style>
+
+<script>
+  // Función para manejar la recarga forzada
+  const forceReload = (e: MouseEvent) => {
+    e.preventDefault();
+    window.location.href = "/";
+  };
+
+  const footerLogo = document.getElementById('footer-logo');
+  const footerHome = document.getElementById('footer-home');
+
+  footerLogo?.addEventListener('click', forceReload);
+  footerHome?.addEventListener('click', forceReload);
+</script>

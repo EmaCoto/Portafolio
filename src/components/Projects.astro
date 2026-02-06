@@ -1,0 +1,128 @@
+---
+import TitleSecundary from "./TitleSecundary.astro";
+
+const projects = [
+  {
+    title: "E-Commerce Alpha",
+    category: "Desarrollo Web / SEO",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200",
+    slug: "ecommerce-alpha"
+  },
+  {
+    title: "SaaS Dashboard",
+    category: "UI/UX / Optimización",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200",
+    slug: "saas-dashboard"
+  },
+  {
+    title: "Portfolio 2026",
+    category: "Astro / GSAP",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200",
+    slug: "portfolio-2026"
+  },
+  {
+    title: "Portfolio 2026",
+    category: "Astro / GSAP",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200",
+    slug: "portfolio-2026"
+  }
+];
+---
+
+<div class="bg-[#0a0709] w-full overflow-hidden">
+  <section id="projects-section" class="relative min-h-screen flex flex-col justify-center py-12 md:py-20">
+    <TitleSecundary h2="Proyectos" span="Trabajos Destacados" />
+
+    <div class="projects-container relative mt-8 flex items-center">
+      <div class="projects-wrapper flex gap-6 md:gap-12 px-[5vw] md:px-[10vw]">
+        {projects.map((project, index) => (
+          <div class="flex flex-col gap-4">
+             <span class="text-[#72bf78] font-mono text-xs opacity-50">0{index + 1}</span>
+            
+            <a 
+              href={`/proyectos/${project.slug}`}
+              class="project-card group relative min-w-[80vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[45vh] md:h-[55vh] overflow-hidden rounded-xl bg-[#111] block"
+            >
+              <div class="absolute inset-0 z-20 bg-linear-to-t from-[#0a0709] via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity"></div>
+
+              <img 
+                src={project.image} 
+                alt={project.title} 
+                class="project-img absolute inset-0 w-full h-full object-cover scale-110 transition-transform duration-1000 group-hover:scale-100 opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0"
+              />
+
+              <div class="absolute bottom-0 left-0 p-6 md:p-8 z-30 transition-transform duration-500 group-hover:-translate-y-2">
+                <p class="text-[#72bf78] font-mono text-[10px] md:text-xs mb-1 tracking-[0.2em] uppercase">{project.category}</p>
+                <h3 class="text-white text-2xl md:text-4xl font-black uppercase tracking-tighter leading-tight">
+                  {project.title}
+                </h3>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const initProjects = () => {
+    const section = document.querySelector("#projects-section");
+    const wrapper = document.querySelector(".projects-wrapper");
+
+    if (!section || !wrapper) return;
+
+    // Animación horizontal
+    gsap.to(wrapper, {
+      x: () => -(wrapper.scrollWidth - window.innerWidth + window.innerWidth * 0.05),
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        pin: true,
+        scrub: 1,
+        start: "top top", 
+        end: () => "+=" + wrapper.scrollWidth,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    // Tilt suave
+    const cards = document.querySelectorAll(".project-card");
+    cards.forEach(card => {
+      card.addEventListener("mousemove", (e: any) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(card, {
+          rotationY: x * 5,
+          rotationX: -y * 5,
+          duration: 0.5,
+          ease: "power2.out"
+        });
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, { rotationY: 0, rotationX: 0, duration: 0.5 });
+      });
+    });
+  };
+
+  initProjects();
+  document.addEventListener("astro:after-swap", initProjects);
+</script>
+
+<style>
+  #projects-section { will-change: transform; }
+  .project-card { transform-style: preserve-3d; perspective: 1000px; }
+  
+  /* Corregir el color del espacio que crea GSAP */
+  :global(.pin-spacer) {
+    background-color: #0a0709 !important;
+  }
+</style>

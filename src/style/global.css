@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Evitar que el carrusel cause scroll horizontal accidental */
+body {
+  overflow-x: hidden;
+}
+
+html, body, a, button {
+  cursor: none !important;
+}
+
+
+/* ___________________________________scroll________________________________ */
+
+/* 1. Definir ancho */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 2. El fondo */
+::-webkit-scrollbar-track {
+  background: #0a0709;
+}
+
+/* 3. La barra verde */
+::-webkit-scrollbar-thumb {
+  background: #72bf78;
+  border-radius: 10px;
+}
+
+/* 4. AQUÍ ESTÁ LO QUE FALTA: Borrar las flechas de raíz */
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+/* ___________________________________scroll________________________________ */

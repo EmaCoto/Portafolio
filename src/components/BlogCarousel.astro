@@ -1,0 +1,179 @@
+---
+import TitleSecundary from "./TitleSecundary.astro";
+
+const posts = [
+  {
+    title: "Optimización Web: El arte de la velocidad",
+    description: "Técnicas avanzadas de renderizado para reducir el tiempo de carga en un 70%.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800",
+    date: "2026-01-15",
+    category: "Rendimiento",
+    url: "/blog/optimizacion-web"
+  },
+  {
+    title: "Astro vs Next.js: ¿Cuál elegir en 2026?",
+    description: "Comparativa técnica basada en proyectos reales y SEO nativo.",
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800",
+    date: "2026-01-10",
+    category: "Desarrollo",
+    url: "/blog/astro-vs-nextjs"
+  },
+  {
+    title: "SEO Técnico: Más allá de las Keywords",
+    description: "Estrategias de indexación y datos estructurados para dominar Google.",
+    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=800",
+    date: "2026-01-05",
+    category: "SEO",
+    url: "/blog/seo-tecnico"
+  },
+  {
+    title: "IA en el Frontend",
+    description: "Cómo integrar modelos de lenguaje directamente en tus componentes Astro.",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800",
+    date: "2026-01-01",
+    category: "IA",
+    url: "/blog/ia-frontend"
+  }
+];
+---
+
+<section class="bg-[#0a0709] md:py-24 py-16 overflow-hidden">
+  <TitleSecundary h2="Diario" span="Blog & Artículos" />
+
+  <div class="max-w-7xl mx-auto px-4 mt-12 relative flex flex-col items-center">
+    
+    <div class="relative w-full overflow-visible cursor-grab active:cursor-grabbing">
+      <div id="blogSlider" class="blog-slider flex gap-6 transition-none">
+        {posts.map((post, index) => (
+          <article 
+            class="blog-card shrink-0 w-full md:w-[calc(50%-12px)] h-auto md:h-65 select-none"
+            data-index={index}
+          >
+            <div class="relative w-full h-full bg-[#0d0d0d] rounded-2xl border border-white/5 overflow-hidden flex flex-col md:flex-row group shadow-2xl pointer-events-none md:pointer-events-auto">
+              <div class="relative w-full md:w-[40%] h-45 md:h-full overflow-hidden shrink-0">
+                <img 
+                  src={post.image} 
+                  alt={post.title} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100"
+                  draggable="false"
+                />
+              </div>
+
+              <div class="p-6 flex flex-col justify-center flex-1">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-[#72bf78] font-mono text-[9px] tracking-widest uppercase bg-[#72bf78]/5 px-2 py-1 rounded border border-[#72bf78]/20">
+                    {post.category}
+                  </span>
+                  <time datetime={post.date} class="text-white/30 font-mono text-[9px]">
+                    {post.date}
+                  </time>
+                </div>
+
+                <h3 class="text-white text-lg md:text-xl font-black uppercase tracking-tighter leading-none mb-3 group-hover:text-[#72bf78] transition-colors line-clamp-2 italic">
+                  {post.title}
+                </h3>
+
+                <p class="text-neutral-400 text-xs md:text-sm font-light leading-relaxed mb-6 line-clamp-2 md:line-clamp-3">
+                  {post.description}
+                </p>
+
+                <a href={post.url} class="group/btn inline-flex items-center gap-3 text-white font-mono text-[10px] tracking-[0.2em] uppercase pointer-events-auto">
+                  <span class="relative z-10 group-hover:text-[#72bf78] transition-colors">Ver Post</span>
+                  <div class="w-8 h-px bg-[#72bf78] group-hover/btn:w-12 transition-all"></div>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex items-center gap-6 mt-12">
+      <button id="prevBlog" class="p-3 rounded-full border border-white/5 hover:border-[#72bf78]/50 text-white/50 hover:text-[#72bf78] transition-all disabled:opacity-20 disabled:pointer-events-none">
+        <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+      
+      <div id="counter" class="text-white font-mono text-[10px] tracking-widest opacity-40">
+        <span id="currentNum">1</span> / <span id="totalNum">--</span>
+      </div>
+
+      <button id="nextBlog" class="p-3 rounded-full border border-white/5 hover:border-[#72bf78]/50 text-white/50 hover:text-[#72bf78] transition-all disabled:opacity-20 disabled:pointer-events-none">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { Draggable } from "gsap/all"; 
+
+  gsap.registerPlugin(Draggable);
+
+  let currentIndex = 0;
+  // Usamos casting más agresivo para limpiar los errores de la imagen
+  const btnNext = document.getElementById('nextBlog') as HTMLButtonElement | null;
+  const btnPrev = document.getElementById('prevBlog') as HTMLButtonElement | null;
+  const slider = document.getElementById('blogSlider') as HTMLElement | null;
+  const cards = document.querySelectorAll('.blog-card');
+  const currentNum = document.getElementById('currentNum');
+  const totalNum = document.getElementById('totalNum');
+
+  function getCarouselData() {
+    const isMobile = window.innerWidth < 768;
+    const cardsToShow = isMobile ? 1 : 2;
+    const firstCard = cards[0] as HTMLElement;
+    const cardWidth = firstCard ? firstCard.clientWidth + 24 : 0;
+    const totalSteps = Math.ceil(cards.length / cardsToShow);
+    return { cardsToShow, cardWidth, totalSteps };
+  }
+
+  function updateVisuals(smooth = true) {
+    if (!slider || cards.length === 0) return;
+    const { cardWidth, cardsToShow, totalSteps } = getCarouselData();
+    const moveX = -(currentIndex * cardWidth * cardsToShow);
+
+    gsap.to(slider, {
+      x: moveX,
+      duration: smooth ? 0.8 : 0,
+      ease: "power4.out"
+    });
+
+    if (totalNum) totalNum.innerText = totalSteps.toString();
+    if (currentNum) currentNum.innerText = (currentIndex + 1).toString();
+    if (btnPrev) btnPrev.disabled = currentIndex === 0;
+    if (btnNext) btnNext.disabled = currentIndex >= totalSteps - 1;
+  }
+
+  if (slider) {
+    Draggable.create(slider, {
+      type: "x",
+      edgeResistance: 0.65,
+      inertia: true,
+      onDragEnd: function() {
+        const { cardWidth, cardsToShow, totalSteps } = getCarouselData();
+        const calculatedIndex = Math.round(-this.x / (cardWidth * cardsToShow));
+        currentIndex = Math.max(0, Math.min(calculatedIndex, totalSteps - 1));
+        updateVisuals();
+      }
+    });
+  }
+
+  btnNext?.addEventListener('click', () => {
+    const { totalSteps } = getCarouselData();
+    if (currentIndex < totalSteps - 1) {
+      currentIndex++;
+      updateVisuals();
+    }
+  });
+
+  btnPrev?.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateVisuals();
+    }
+  });
+
+  window.addEventListener('resize', () => updateVisuals(false));
+  updateVisuals();
+</script>

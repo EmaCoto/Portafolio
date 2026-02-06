@@ -1,0 +1,175 @@
+---
+import { Image } from 'astro:assets';
+import miFoto from '../assets/img/photo_emanuel_cortes_ochoa.webp';
+---
+
+<div id="wrapper-entrada" class="relative w-full overflow-hidden bg-[#0a0709] pt-10">
+  <div id="loader-wrapper" class="fixed inset-0 z-120 w-full h-full overflow-hidden pointer-events-none">
+    <div class="loader-col fixed top-0 left-0 w-1/4 h-full bg-[#0a0709] border-r border-white/5"></div>
+    <div class="loader-col fixed top-0 left-[25%] w-1/4 h-full bg-[#0a0709] border-r border-white/5"></div>
+    <div class="loader-col fixed top-0 left-[50%] w-1/4 h-full bg-[#0a0709] border-r border-white/5"></div>
+    <div class="loader-col fixed top-0 left-[75%] w-1/4 h-full bg-[#0a0709]"></div>
+
+    <div id="loader-content" class="absolute inset-0 flex items-center justify-center px-6">
+      <span id="main-title" class="flex flex-col lg:flex-row items-center justify-center gap-x-6 text-4xl sm:text-6xl md:text-[8vw] font-black text-[#ffffff] uppercase tracking-tighter italic text-center leading-none">
+        <div class="flex flex-wrap justify-center uppercase">
+          { "EMANUEL".split('').map(char => ( <span class="char inline-block">{char}</span> ))}
+        </div>
+        <div class="flex flex-wrap justify-center uppercase">
+          { "CORTES".split('').map(char => ( <span class="char inline-block">{char}</span> ))}
+        </div>
+      </span>
+    </div>
+  </div>
+
+  <main id="main-content" class="invisible w-full min-h-screen bg-[#0a0709] text-[#ffffff] relative flex items-center py-20 md:py-0">
+    <section class="w-full px-6 md:px-10">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <div class="lg:col-span-4 lg:order-last relative flex justify-center order-first">
+          <div id="hero-image-wrapper" class="relative w-full max-w-[320px] sm:max-w-100 lg:max-w-none aspect-4/5 opacity-0 scale-90">
+            <div class="absolute -inset-3 border border-[#72bf78]/20 -z-10 translate-x-3 translate-y-3"></div>
+            
+            <div class="w-full h-full overflow-hidden bg-neutral-900 grayscale hover:grayscale-0 transition-all duration-700 rounded-sm border border-white/10">
+              <Image 
+                src={miFoto} 
+                alt="Emanuel Cortes" 
+                class="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-1000"
+              />
+            </div>
+
+            <div class="absolute -bottom-4 -left-4 bg-[#0a0709] border border-white/10 p-3 sm:p-4 hidden sm:block backdrop-blur-xl">
+              <p class="text-[9px] font-mono text-[#72bf78] uppercase mb-1">Status</p>
+              <p class="text-[10px] sm:text-xs font-bold uppercase italic text-white tracking-tighter">Disponible para nuevos proyectos</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-8 z-10 text-center lg:text-left">
+          <p class="text-[#72bf78] font-mono text-xs sm:text-sm md:text-lg mb-4 sm:mb-6 overflow-hidden uppercase flex items-center justify-center lg:justify-start gap-3">
+            <span class="w-6 sm:w-8 h-px bg-[#72bf78] hidden sm:block"></span>
+            <span id="hero-sub" class="inline-block translate-y-full italic tracking-[0.15em]">Desarrollo Web & SEO Técnico</span>
+          </p>
+          
+          <h1 id="hero-title" class="text-[12vw] sm:text-[10vw] lg:text-[8.5vw] font-black leading-[0.9] lg:leading-[0.82] tracking-tighter uppercase text-[#ffffff] mb-8 sm:mb-10">
+            CÓDIGO <br class="hidden sm:block"/> QUE COBRA <br/> 
+            <span class="text-neutral-800 italic outline-text block sm:inline">VIDA.</span>
+          </h1>
+
+          <div id="hero-cta" class="flex flex-col sm:flex-row gap-6 items-center justify-center lg:justify-start opacity-0 translate-y-10">
+            <a href="#contacto" class="w-full sm:w-auto text-center group relative px-8 py-4 bg-[#72bf78] text-[#0a0709] font-black uppercase italic tracking-widest text-sm overflow-hidden rounded-sm transition-transform hover:scale-105 active:scale-95">
+              <span class="relative z-10">Iniciar Proyecto</span>
+              <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </a>
+            <a href="/proyectos" class="group flex items-center gap-3 text-white/50 hover:text-white transition-colors">
+              <span class="font-mono text-[10px] uppercase tracking-[0.3em]">Ver portafolio</span>
+              <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#72bf78] group-hover:text-[#72bf78] transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <slot />
+  </main>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const initAnimation = () => {
+    const tl = gsap.timeline();
+    document.body.style.overflow = "hidden";
+
+    gsap.set(".char", { y: 120, rotationX: -90, opacity: 0 });
+    gsap.set("#main-content", { autoAlpha: 0 });
+
+    tl
+      .to(".char", {
+        y: 0,
+        rotationX: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.03,
+        ease: "expo.out"
+      })
+      .to(".char", {
+        color: "#72bf78",
+        duration: 0.4,
+      })
+      .to("#loader-content", {
+        y: -100,
+        opacity: 0,
+        duration: 0.7,
+        ease: "expo.in"
+      }, "+=0.2")
+      .to(".loader-col", {
+        yPercent: -100,
+        duration: 1,
+        stagger: 0.08,
+        ease: "expo.inOut"
+      }, "-=0.3")
+      .to("#main-content", {
+        autoAlpha: 1,
+        duration: 0.4,
+        onComplete: () => {
+          document.body.style.overflowY = "auto";
+          document.body.style.overflowX = "hidden";
+        }
+      }, "-=0.6")
+      .to("#hero-sub", {
+        y: 0,
+        duration: 0.7,
+        ease: "power4.out"
+      }, "-=0.2")
+      .from("#hero-title", {
+        y: 40,
+        opacity: 0,
+        filter: "blur(15px)",
+        duration: 1,
+        ease: "expo.out"
+      }, "-=0.5")
+      .to("#hero-cta", {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out"
+      }, "-=0.8")
+      .to("#hero-image-wrapper", {
+        opacity: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "expo.out"
+      }, "-=1");
+  };
+
+  initAnimation();
+</script>
+
+<style>
+  @reference "../style/global.css";
+
+  #main-title { perspective: 1000px; }
+  .invisible { visibility: hidden; }
+  
+  .outline-text {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+    color: transparent;
+    transition: all 0.5s ease;
+  }
+  
+  #hero-title:hover .outline-text {
+    -webkit-text-stroke: 1px #72bf78;
+    color: #72bf78;
+    text-shadow: 0 0 20px rgba(114, 191, 120, 0.3);
+  }
+
+  /* Ajuste para evitar que el texto grande rompa el layout en móviles muy pequeños */
+  @media (max-width: 380px) {
+    #hero-title {
+      font-size: 14vw;
+    }
+  }
+</style>
