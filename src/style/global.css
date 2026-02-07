@@ -10,9 +10,9 @@ body {
   overflow-x: hidden;
 }
 
-html, body, a, button {
+/* html, body, a, button {
   cursor: none !important;
-}
+} */
 
 
 /* ___________________________________scroll________________________________ */

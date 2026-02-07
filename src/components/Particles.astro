@@ -1,83 +1,180 @@
 ---
 // Particles.astro
 ---
-<div id="particles-container" class="fixed inset-0 pointer-events-none z-1">
+<div id="particles-container" transition:persist class="fixed inset-0 pointer-events-none z-0">
   <canvas id="particles-canvas"></canvas>
 </div>
 
 <script>
-  // Definimos la interfaz para que TS sepa qué hay dentro de la partícula
   interface IParticle {
-    draw: () => void;
     update: () => void;
+    draw: () => void;
   }
 
-  const canvas = document.getElementById("particles-canvas") as HTMLCanvasElement;
-  const ctx = canvas?.getContext("2d");
-
-  let particles: IParticle[] = []; // Especificamos que es un array de partículas
-  const particleCount = 80;
+  let canvas: HTMLCanvasElement | null;
+  let ctx: CanvasRenderingContext2D | null;
+  let particles: Particle[] = [];
+  let animationId: number;
   const mouse = { x: 0, y: 0 };
 
-  const resize = () => {
-    if (!canvas) return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  // Configuración refinada: Menos líneas, más sutil
+  const config = {
+    number: 90,           // Cantidad equilibrada
+    links: {
+      distance: 90,       // Distancia corta = menos líneas
+      opacity: 0.12,      // Opacidad muy baja para que casi no se noten
+      color: "255, 255, 255"
+    },
+    move: {
+      speed: 1.2,         // Movimiento suave y elegante
+    },
+    size: {
+      min: 1,
+      max: 5              // Partículas más finas
+    },
+    opacity: {
+      min: 0.1,
+      max: 0.4
+    },
+    interactivity: {
+      grabDistance: 180,  // Radio de interacción con el mouse reducido
+      parallaxForce: 70   // Mayor valor = movimiento más sutil y profundo
+    }
   };
 
   class Particle implements IParticle {
-    x: number; y: number; baseX: number; baseY: number; size: number; density: number;
-    
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    size: number;
+    opacity: number;
+    opacitySpeed: number;
+
     constructor() {
       this.x = Math.random() * (canvas?.width || window.innerWidth);
       this.y = Math.random() * (canvas?.height || window.innerHeight);
-      this.baseX = this.x;
-      this.baseY = this.y;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.density = (Math.random() * 30) + 1;
+      this.vx = (Math.random() - 0.5) * config.move.speed;
+      this.vy = (Math.random() - 0.5) * config.move.speed;
+      this.size = Math.random() * (config.size.max - config.size.min) + config.size.min;
+      this.opacity = Math.random() * (config.opacity.max - config.opacity.min) + config.opacity.min;
+      this.opacitySpeed = 0.002 + Math.random() * 0.005;
     }
 
     draw() {
       if (!ctx) return;
-      ctx.fillStyle = "rgba(114, 191, 120, 0.4)";
+      ctx.fillStyle = `rgba(${config.links.color}, ${this.opacity})`;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
     }
 
     update() {
-      let dx = mouse.x - this.x;
-      let dy = mouse.y - this.y;
-      let distance = Math.sqrt(dx * dx + dy * dy);
-      let maxDistance = 150;
+      this.x += this.vx;
+      this.y += this.vy;
 
-      if (distance < maxDistance) {
-        let force = (maxDistance - distance) / maxDistance;
-        this.x -= (dx / distance) * force * this.density;
-        this.y -= (dy / distance) * force * this.density;
-      } else {
-        if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 20;
-        if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 20;
+      // Oscilación de opacidad (parpadeo sutil)
+      this.opacity += this.opacitySpeed;
+      if (this.opacity > config.opacity.max || this.opacity < config.opacity.min) {
+        this.opacitySpeed *= -1;
+      }
+
+      // Rebote suave en los bordes del canvas
+      if (this.x < 0 || this.x > (canvas?.width || window.innerWidth)) this.vx *= -1;
+      if (this.y < 0 || this.y > (canvas?.height || window.innerHeight)) this.vy *= -1;
+    }
+  }
+
+  function drawInteractions() {
+    if (!ctx) return;
+    
+    // Calculamos el offset del parallax para que las líneas sigan a las partículas
+    const parallaxX = (mouse.x - window.innerWidth / 2) / config.interactivity.parallaxForce;
+    const parallaxY = (mouse.y - window.innerHeight / 2) / config.interactivity.parallaxForce;
+
+    for (let i = 0; i < particles.length; i++) {
+      const p1 = particles[i];
+
+      // 1. Efecto Grab (Línea al mouse)
+      // Ajustamos la posición del mouse relativa al mundo transformado por el parallax
+      const targetMouseX = mouse.x + parallaxX;
+      const targetMouseY = mouse.y + parallaxY;
+      
+      const dxMouse = p1.x - targetMouseX;
+      const dyMouse = p1.y - targetMouseY;
+      const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+
+      if (distMouse < config.interactivity.grabDistance) {
+        const grabOpacity = (1 - distMouse / config.interactivity.grabDistance) * 0.15;
+        ctx.strokeStyle = `rgba(${config.links.color}, ${grabOpacity})`;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(targetMouseX, targetMouseY);
+        ctx.stroke();
+      }
+
+      // 2. Líneas entre partículas (Links)
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p1.x - p2.x;
+        const dy = p1.y - p2.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < config.links.distance) {
+          const linkOpacity = (1 - distance / config.links.distance) * config.links.opacity;
+          ctx.strokeStyle = `rgba(${config.links.color}, ${linkOpacity})`;
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        }
       }
     }
   }
 
-  function init() {
-    particles = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
+  function animate() {
+    if (!ctx || !canvas) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Aplicar Parallax
+    const parallaxX = (mouse.x - window.innerWidth / 2) / config.interactivity.parallaxForce;
+    const parallaxY = (mouse.y - window.innerHeight / 2) / config.interactivity.parallaxForce;
+
+    ctx.save();
+    // Movemos el "mundo" en dirección opuesta al mouse
+    ctx.translate(-parallaxX, -parallaxY);
+
+    for (const particle of particles) {
+      particle.update();
+      particle.draw();
     }
+    drawInteractions();
+    
+    ctx.restore();
+    animationId = requestAnimationFrame(animate);
   }
 
-  function animate() {
-    if (!ctx || !canvas) return; // Validación crucial para TS
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (const particle of particles) {
-      particle.draw();
-      particle.update();
+  function init() {
+    canvas = document.getElementById("particles-canvas") as HTMLCanvasElement;
+    if (!canvas) return;
+    ctx = canvas.getContext("2d");
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    particles = [];
+    for (let i = 0; i < config.number; i++) {
+      particles.push(new Particle());
     }
-    requestAnimationFrame(animate);
+
+    if (animationId) cancelAnimationFrame(animationId);
+    animate();
   }
+
+  // Reiniciar cuando Astro cambia de página
+  document.addEventListener("astro:page-load", init);
 
   window.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
@@ -85,11 +182,13 @@
   });
 
   window.addEventListener("resize", () => {
-    resize();
-    init();
+    if (!canvas) return;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    // Redistribuir partículas para que no queden huecos al agrandar pantalla
+    particles.forEach(p => {
+      p.x = Math.random() * canvas!.width;
+      p.y = Math.random() * canvas!.height;
+    });
   });
-
-  resize();
-  init();
-  animate();
 </script>
