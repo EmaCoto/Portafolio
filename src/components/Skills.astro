@@ -3,6 +3,8 @@ import TitleSecundary from "./TitleSecundary.astro";
 
 // Skills.astro - Usando la misma lista y nombres de clases que la Navbar
 const skills = [
+  { name: "HTML5", icon: "devicon-html5-plain" },
+  { name: "CSS3", icon: "devicon-css3-plain" },
   { name: "PHP", icon: "devicon-php-plain" },
   { name: "JavaScript", icon: "devicon-javascript-plain" },
   { name: "SQL", icon: "devicon-mysql-plain" },
@@ -22,7 +24,7 @@ const doubleSkills = [...skills, ...skills];
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-<section class="bg-[#0a0709] overflow-hidden py-20 z-50">
+<section id="skills" class="bg-[#0a0709] overflow-hidden py-20 z-50">
   <TitleSecundary h2="Conocimientos" span="Stack Tecnológico"/>
 
   <div class="relative flex overflow-x-hidden group/marquee mt-10">

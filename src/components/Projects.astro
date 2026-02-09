@@ -17,7 +17,7 @@ const projects = rawProjects
   }));
 ---
 
-<div class="w-full overflow-hidden bg-[#0a0709]">
+<div class="w-full overflow-hidden">
   <section id="projects-section" class="relative min-h-screen flex flex-col justify-center py-12 md:py-20">
     <TitleSecundary h2="Proyectos" span="Trabajos Destacados" />
 
@@ -112,8 +112,4 @@ const projects = rawProjects
 <style>
   #projects-section { will-change: transform; }
   .project-card { transform-style: preserve-3d; perspective: 1000px; }
-  
-  :global(.pin-spacer) {
-    background-color: #0a0709 !important;
-  }
 </style>
