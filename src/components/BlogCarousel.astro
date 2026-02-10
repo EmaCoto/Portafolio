@@ -1,18 +1,15 @@
 ---
+// (Tu código de Astro se mantiene igual arriba...)
 import { getCollection } from "astro:content";
 import TitleSecundary from "./TitleSecundary.astro";
 
-// Obtenemos los posts reales
 const allPosts = await getCollection("blog");
-
 const publishedPosts = allPosts
   .filter((p) => !p.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 6);
 
 const posts = publishedPosts.map((post) => {
-  // ✅ Solución al error de TypeScript:
-  // Forzamos a que si no es string, lo trate como un objeto que contiene 'src'
   const imageSrc = typeof post.data.heroImage === 'string' 
     ? post.data.heroImage 
     : (post.data.heroImage as any)?.src || '';
@@ -32,47 +29,23 @@ const posts = publishedPosts.map((post) => {
   <TitleSecundary h2="Diario" span="Blog & Artículos" />
 
   <div class="max-w-7xl mx-auto px-4 mt-12 relative flex flex-col items-center">
-    
     <div class="relative w-full overflow-visible cursor-grab active:cursor-grabbing">
       <div id="blogSlider" class="blog-slider flex gap-6 transition-none">
         {posts.map((post, index) => (
           <article class="blog-card shrink-0 w-full md:w-[calc(50%-12px)] select-none" data-index={index} >
             <div class="relative w-full h-full bg-[#0d0d0d] rounded-3xl border border-white/5 overflow-hidden flex flex-col md:flex-row group shadow-2xl pointer-events-none md:pointer-events-auto transition-all hover:border-[#72bf78]/30">
-              
-              {/* Imagen: Ahora con altura mínima controlada para no aplastar el texto */}
               <div class="relative w-full md:w-[40%] aspect-video md:aspect-auto md:h-full overflow-hidden shrink-0">
-                <img 
-                  src={post.image} 
-                  alt={post.title} 
-                  class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100"
-                  draggable="false"
-                />
-                {/* más suave para la transición al texto */}
+                <img src={post.image} alt={post.title} class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100" draggable="false" />
                 <div class="absolute inset-0 bg-linear-to-t md:bg-linear-to-r from-[#0d0d0d] via-transparent to-transparent"></div>
               </div>
-
-              {/* Contenido: Sin restricciones de altura para que el texto respire */}
               <div class="p-6 md:p-8 flex flex-col justify-center flex-1 min-h-70">
                 <div class="flex items-center gap-3 mb-4">
-                  <span class="text-[#72bf78] font-mono text-[9px] tracking-widest uppercase bg-[#72bf78]/10 px-3 py-1 rounded-full border border-[#72bf78]/20">
-                    {post.category}
-                  </span>
-                  <time class="text-white/20 font-mono text-[9px]">
-                    {post.date}
-                  </time>
+                  <span class="text-[#72bf78] font-mono text-[9px] tracking-widest uppercase bg-[#72bf78]/10 px-3 py-1 rounded-full border border-[#72bf78]/20">{post.category}</span>
+                  <time class="text-white/20 font-mono text-[9px]">{post.date}</time>
                 </div>
-
-                {/* Título: Eliminado el line-clamp para verlo completo */}
-                <h3 class="text-white text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight mb-4 group-hover:text-[#72bf78] transition-colors italic">
-                  {post.title}
-                </h3>
-
-                {/* Descripción: Eliminado el line-clamp y ajustado el color para legibilidad */}
-                <p class="text-neutral-400 text-sm font-light leading-relaxed mb-8 max-w-[90%]">
-                  {post.description}
-                </p>
-
-                <div class="mt-auto"> {/* Empuja el botón siempre al final */}
+                <h3 class="text-white text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight mb-4 group-hover:text-[#72bf78] transition-colors italic">{post.title}</h3>
+                <p class="text-neutral-400 text-sm font-light leading-relaxed mb-8 max-w-[90%]">{post.description}</p>
+                <div class="mt-auto">
                   <a href={post.url} class="group/btn inline-flex items-center gap-4 text-white font-mono text-[11px] tracking-[0.3em] uppercase pointer-events-auto">
                     <span class="group-hover:text-[#72bf78] transition-colors">Leer más</span>
                     <div class="w-10 h-px bg-white/20 group-hover/btn:bg-[#72bf78] group-hover/btn:w-16 transition-all duration-500"></div>
@@ -85,18 +58,15 @@ const posts = publishedPosts.map((post) => {
       </div>
     </div>
 
-    {/* Controles Estilizados */}
     <div class="flex items-center gap-8 mt-16">
       <button id="prevBlog" class="group p-4 rounded-full border border-white/5 hover:border-[#72bf78]/40 text-white/20 hover:text-[#72bf78] transition-all disabled:opacity-5">
         <svg class="w-6 h-6 rotate-180 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
       </button>
-      
       <div class="flex items-center gap-2 font-mono text-[12px] tracking-tighter">
         <span id="currentNum" class="text-[#72bf78] font-bold text-lg">01</span>
         <span class="text-white/10 text-xl">/</span>
         <span id="totalNum" class="text-white/20">00</span>
       </div>
-
       <button id="nextBlog" class="group p-4 rounded-full border border-white/5 hover:border-[#72bf78]/40 text-white/20 hover:text-[#72bf78] transition-all disabled:opacity-5">
         <svg class="w-6 h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
       </button>
@@ -110,66 +80,56 @@ const posts = publishedPosts.map((post) => {
 
   gsap.registerPlugin(Draggable);
 
-  // Variables de estado
-  let currentIndex = 0;
+  let blogDraggable: any = null;
 
-  // Selectores
-  const btnNext = document.getElementById('nextBlog') as HTMLButtonElement | null;
-  const btnPrev = document.getElementById('prevBlog') as HTMLButtonElement | null;
-  const slider = document.getElementById('blogSlider') as HTMLElement | null;
-  const currentNum = document.getElementById('currentNum');
-  const totalNum = document.getElementById('totalNum');
+  const initBlogSlider = () => {
+    let currentIndex = 0;
+    const btnNext = document.getElementById('nextBlog') as HTMLButtonElement | null;
+    const btnPrev = document.getElementById('prevBlog') as HTMLButtonElement | null;
+    const slider = document.getElementById('blogSlider') as HTMLElement | null;
+    const currentNum = document.getElementById('currentNum');
+    const totalNum = document.getElementById('totalNum');
 
-  function getCarouselData() {
-    // Volvemos a seleccionar las cards para tener el número real actual
-    const cards = document.querySelectorAll('.blog-card');
-    const isMobile = window.innerWidth < 768;
-    const cardsToShow = isMobile ? 1 : 2;
-    
-    // Calculamos el ancho basándonos en la primera card y el gap
-    const firstCard = cards[0] as HTMLElement;
-    const cardWidth = firstCard ? firstCard.offsetWidth + 24 : 0; 
-    
-    // Total de "páginas" o clics necesarios
-    const totalSteps = Math.max(1, Math.ceil(cards.length / cardsToShow));
-    
-    return { cardsToShow, cardWidth, totalSteps, totalCards: cards.length };
-  }
-
-  function updateVisuals(smooth = true) {
     if (!slider) return;
-    const { cardWidth, cardsToShow, totalSteps } = getCarouselData();
-    
-    // Ajuste de seguridad para el índice
-    if (currentIndex >= totalSteps) currentIndex = totalSteps - 1;
 
-    const moveX = -(currentIndex * (cardWidth * cardsToShow));
+    function getCarouselData() {
+      const cards = document.querySelectorAll('.blog-card');
+      const isMobile = window.innerWidth < 768;
+      const cardsToShow = isMobile ? 1 : 2;
+      const firstCard = cards[0] as HTMLElement;
+      const cardWidth = firstCard ? firstCard.offsetWidth + 24 : 0; 
+      const totalSteps = Math.max(1, Math.ceil(cards.length / cardsToShow));
+      return { cardWidth, cardsToShow, totalSteps };
+    }
 
-    gsap.to(slider, {
-      x: moveX,
-      duration: smooth ? 0.8 : 0,
-      ease: "power4.out"
-    });
+    function updateVisuals(smooth = true) {
+      const { cardWidth, cardsToShow, totalSteps } = getCarouselData();
+      if (currentIndex >= totalSteps) currentIndex = totalSteps - 1;
+      if (currentIndex < 0) currentIndex = 0;
 
-    // Actualizar números (con formato 01, 02...)
-    if (totalNum) totalNum.innerText = totalSteps.toString().padStart(2, '0');
-    if (currentNum) currentNum.innerText = (currentIndex + 1).toString().padStart(2, '0');
-    
-    // Habilitar/Deshabilitar botones
-    if (btnPrev) btnPrev.disabled = currentIndex === 0;
-    if (btnNext) btnNext.disabled = currentIndex >= totalSteps - 1;
-  }
+      const moveX = -(currentIndex * (cardWidth * cardsToShow));
 
-  // Inicialización de Draggable
-  if (slider) {
-    Draggable.create(slider, {
+      gsap.to(slider, {
+        x: moveX,
+        duration: smooth ? 0.8 : 0,
+        ease: "power4.out"
+      });
+
+      if (totalNum) totalNum.innerText = totalSteps.toString().padStart(2, '0');
+      if (currentNum) currentNum.innerText = (currentIndex + 1).toString().padStart(2, '0');
+      if (btnPrev) btnPrev.disabled = currentIndex === 0;
+      if (btnNext) btnNext.disabled = currentIndex >= totalSteps - 1;
+    }
+
+    // Matar instancia previa de Draggable si existe
+    if (blogDraggable) blogDraggable[0].kill();
+
+    blogDraggable = Draggable.create(slider, {
       type: "x",
       edgeResistance: 0.85,
-      bounds: { minX: 0, maxX: 0 }, // Se actualiza dinámicamente en el drag
       inertia: true,
       onDragStart: function() {
         const { cardWidth, cardsToShow, totalSteps } = getCarouselData();
-        // Actualizamos los límites del arrastre al empezar
         this.vars.bounds = { 
           minX: -((totalSteps - 1) * (cardWidth * cardsToShow)), 
           maxX: 0 
@@ -178,35 +138,29 @@ const posts = publishedPosts.map((post) => {
       onDragEnd: function() {
         const { cardWidth, cardsToShow, totalSteps } = getCarouselData();
         const stepWidth = cardWidth * cardsToShow;
-        // Calculamos a qué índice saltar basándonos en dónde soltamos
         currentIndex = Math.round(-this.x / stepWidth);
         currentIndex = Math.max(0, Math.min(currentIndex, totalSteps - 1));
         updateVisuals();
       }
     });
-  }
 
-  // Eventos de botones
-  btnNext?.addEventListener('click', () => {
-    const { totalSteps } = getCarouselData();
-    if (currentIndex < totalSteps - 1) {
-      currentIndex++;
-      updateVisuals();
-    }
-  });
+    // Eventos
+    btnNext?.addEventListener('click', () => {
+      const { totalSteps } = getCarouselData();
+      if (currentIndex < totalSteps - 1) { currentIndex++; updateVisuals(); }
+    });
 
-  btnPrev?.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateVisuals();
-    }
-  });
+    btnPrev?.addEventListener('click', () => {
+      if (currentIndex > 0) { currentIndex--; updateVisuals(); }
+    });
 
-  // Ajuste al cambiar tamaño de ventana
-  window.addEventListener('resize', () => {
+    window.addEventListener('resize', () => updateVisuals(false));
+    
+    // Reset inicial
     updateVisuals(false);
-  });
+  };
 
-  // Ejecución inicial
-  updateVisuals();
+  // Inicialización
+  initBlogSlider();
+  document.addEventListener('astro:after-swap', initBlogSlider);
 </script>

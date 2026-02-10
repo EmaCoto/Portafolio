@@ -1,138 +1,91 @@
-<div id="cursor-dot" class="cursor-element"></div>
-<div id="cursor-outline" class="cursor-element"></div>
+<canvas id="cursor-canvas" class="fixed top-0 left-0 pointer-events-none z-99999"></canvas>
 
 <style>
-  .cursor-element {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    border-radius: 50%;
-    opacity: 0;
-    z-index: 9999;
-    will-change: transform;
-    transition: opacity 0.3s ease;
+  :global(html), :global(body) {
+    /* Mantenemos el cursor normal del sistema como pediste */
+    cursor: auto !important;
   }
 
-  #cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #72bf78;
-    mix-blend-mode: difference;
-  }
-
-  #cursor-outline {
-    width: 40px;
-    height: 40px;
-    border: 1px solid rgba(114, 191, 120, 0.5);
-  }
-
-  /* Estilo base para los destellos */
-  :global(.cursor-sparkle) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    filter: blur(0.5px);
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-  }
-
-  :global(html), :global(body), :global(a), :global(button) {
-    cursor: none !important;
-  }
-
-  @media (hover: none) and (pointer: coarse) {
-    .cursor-element { display: none; }
-    :global(html), :global(body) { cursor: auto !important; }
+  #cursor-canvas {
+    width: 100vw;
+    height: 100vh;
   }
 </style>
 
 <script>
-  import { gsap } from "gsap";
+  const initCanvasCursor = () => {
+    const canvas = document.getElementById('cursor-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
 
-  const dot = document.getElementById('cursor-dot');
-  const outline = document.getElementById('cursor-outline');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  gsap.set([dot, outline], { xPercent: -50, yPercent: -50 });
+    let points: {x: number, y: number, age: number}[] = [];
+    const maxAge = 20; // Duración de la estela
 
-  // Función para crear destellos con colores alternos
-  const createSparkle = (x: number, y: number) => {
-    const sparkle = document.createElement('div');
-    sparkle.className = 'cursor-sparkle';
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    const addPoint = (x: number, y: number) => {
+      points.push({ x, y, age: 0 });
+    };
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (points.length > 1) {
+        ctx.beginPath();
+        ctx.strokeStyle = '#72bf78'; // Tu color verde
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        for (let i = 0; i < points.length - 1; i++) {
+          const p1 = points[i];
+          const p2 = points[i + 1];
+          
+          // Efecto de desvanecimiento: la línea es más transparente al final
+          const opacity = 1 - p1.age / maxAge;
+          ctx.strokeStyle = `rgba(114, 191, 120, ${opacity})`;
+          
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+          
+          p1.age++;
+        }
+      }
+
+      // Eliminar puntos viejos
+      points = points.filter(p => p.age < maxAge);
+      requestAnimationFrame(animate);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      addPoint(e.clientX, e.clientY);
+    };
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', onMouseMove);
     
-    // Lógica de color aleatorio (Verde o Blanco)
-    const isGreen = Math.random() > 0.5;
-    sparkle.style.backgroundColor = isGreen ? '#72bf78' : '#ffffff';
-    
-    document.body.appendChild(sparkle);
+    resize();
+    animate();
 
-    // Posición inicial con tamaño aleatorio
-    gsap.set(sparkle, { 
-      x, 
-      y, 
-      xPercent: -50, 
-      yPercent: -50, 
-      scale: Math.random() * 1.2 + 0.5 
-    });
-
-    // Animación de la partícula
-    gsap.to(sparkle, {
-      x: x + (Math.random() - 0.5) * 60, // Más dispersión para que se note
-      y: y + (Math.random() - 0.5) * 60,
-      opacity: 0,
-      scale: 0,
-      duration: Math.random() * 0.6 + 0.4,
-      ease: "power2.out",
-      onComplete: () => sparkle.remove()
-    });
+    // Limpieza para Astro View Transitions
+    return () => {
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMouseMove);
+    };
   };
 
-  window.addEventListener('mousemove', (e) => {
-    const { clientX, clientY } = e;
+  // Inicializar
+  let cleanup = initCanvasCursor();
 
-    if (dot && outline) {
-      dot.style.opacity = "1";
-      outline.style.opacity = "1";
-    }
-
-    // Generamos destellos al movernos
-    createSparkle(clientX, clientY);
-
-    gsap.to(dot, {
-      x: clientX,
-      y: clientY,
-      duration: 0.1,
-      ease: "power2.out"
-    });
-
-    gsap.to(outline, {
-      x: clientX,
-      y: clientY,
-      duration: 0.5,
-      ease: "power3.out"
-    });
-  });
-
-  const activeElements = "a, button, .group, .blog-card, .nav-item";
-  document.querySelectorAll(activeElements).forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      gsap.to(outline, { scale: 1.5, backgroundColor: "rgba(114, 191, 120, 0.1)", duration: 0.3 });
-      gsap.to(dot, { scale: 0.5, duration: 0.3 });
-    });
-    el.addEventListener('mouseleave', () => {
-      gsap.to(outline, { scale: 1, backgroundColor: "transparent", duration: 0.3 });
-      gsap.to(dot, { scale: 1, duration: 0.3 });
-    });
-  });
-
-  document.addEventListener('mouseleave', () => {
-    gsap.to([dot, outline], { opacity: 0 });
-  });
-  document.addEventListener('mouseenter', () => {
-    gsap.to([dot, outline], { opacity: 1 });
+  document.addEventListener('astro:after-swap', () => {
+    if (cleanup) cleanup();
+    cleanup = initCanvasCursor();
   });
 </script>
