@@ -15,17 +15,8 @@ const { Content } = await project.render();
 ---
 
 <Layout title={`${project.data.title} | Emanuel`}>
-  <main class="bg-[#0a0709] min-h-screen pt-40 pb-20">
+  <main class="bg-[#0a0709] min-h-screen pt-40 pb-20 text-white">
     <article class="max-w-4xl mx-auto px-6">
-      <header class="mb-12">
-        <span class="text-[#72bf78] font-mono text-sm tracking-[0.3em] uppercase">{project.data.category}</span>
-        <h1 class="text-6xl md:text-8xl font-black text-white uppercase italic tracking-tighter mt-4 leading-none">
-          {project.data.title}
-        </h1>
-      </header>
-
-      <img src={project.data.image} alt={project.data.title} class="w-full aspect-video object-cover rounded-3xl border border-white/10 mb-16" />
-
       <div class="prose prose-invert prose-green max-w-none prose-headings:italic prose-headings:font-black prose-p:text-white/60">
         <Content />
       </div>

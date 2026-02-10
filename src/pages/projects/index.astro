@@ -41,9 +41,9 @@ const sortedProjects = allProjects.sort((a, b) => b.data.pubDate.valueOf() - a.d
             <span class="text-[#72bf78] font-mono text-[10px] tracking-widest uppercase bg-[#72bf78]/10 px-3 py-1 rounded-full border border-[#72bf78]/20 w-fit mb-4">
               {project.data.category}
             </span>
-            <h3 class="text-white text-2xl font-black uppercase tracking-tighter leading-tight mb-6 group-hover:text-[#72bf78] transition-colors italic">
+            <h2 class="text-white text-2xl font-black uppercase tracking-tighter leading-tight mb-6 group-hover:text-[#72bf78] transition-colors italic">
               {project.data.title}
-            </h3>
+            </h2>
             <a href={`/projects/${project.slug}/`} class="group/btn inline-flex items-center gap-4 text-white font-mono text-[11px] tracking-[0.3em] uppercase mt-auto">
               <span>Ver Detalles</span>
               <div class="w-10 h-px bg-white/20 group-hover/btn:bg-[#72bf78] group-hover/btn:w-16 transition-all"></div>

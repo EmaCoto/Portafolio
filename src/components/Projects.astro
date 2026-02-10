@@ -21,15 +21,15 @@ const projects = rawProjects
   <section id="projects-section" class="relative min-h-screen flex flex-col justify-center py-12 md:py-20">
     <TitleSecundary h2="Proyectos" span="Trabajos Destacados" />
 
-    <div class="projects-container relative mt-8 flex items-center">
+    <div class="projects-container relative  flex items-center">
       <div class="projects-wrapper flex gap-6 md:gap-12 px-[5vw] md:px-[10vw]">
         {projects.map((project, index) => (
-          <div class="flex flex-col gap-4">
-            <span class="text-[#72bf78] font-mono text-xs opacity-50">0{index + 1}</span>
+          <div class="flex flex-col gap-x-4">
+            {/* <span class="text-[#72bf78] font-mono text-xs opacity-50">0{index + 1}</span> */}
             
             <a 
               href={`/projects/${project.slug}`}
-              class="project-card group relative min-w-[80vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[45vh] md:h-[55vh] overflow-hidden rounded-xl bg-[#111] block"
+              class="project-card group relative min-w-[80vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[45vh] md:h-[55vh] overflow-hidden rounded-xl  block"
             >
               <div class="absolute inset-0 z-20 bg-linear-to-t from-[#0a0709] via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity"></div>
 
@@ -41,7 +41,7 @@ const projects = rawProjects
 
               <div class="absolute bottom-0 left-0 p-6 md:p-8 z-30 transition-transform duration-500 group-hover:-translate-y-2">
                 <p class="text-[#72bf78] font-mono text-[10px] md:text-xs mb-1 tracking-[0.2em] uppercase">{project.category}</p>
-                <h3 class="text-white text-2xl md:text-4xl font-black uppercase tracking-tighter leading-tight italic">
+                <h3 class="text-white text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight italic">
                   {project.title}
                 </h3>
               </div>

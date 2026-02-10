@@ -14,6 +14,7 @@ const blog = defineCollection({
 const projects = defineCollection({
   schema: z.object({
     title: z.string(),
+    description: z.string().optional(),
     category: z.enum(["Página Web", "Aplicación Web"]),
     image: z.string(),
     pubDate: z.coerce.date(),
