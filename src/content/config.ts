@@ -15,7 +15,7 @@ const projects = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    category: z.enum(["Página Web", "Aplicación Web"]),
+    category: z.enum(["Página Web", "Aplicación Web", "Soporte Página Web"]),
     image: z.string(),
     pubDate: z.coerce.date(),
     featured: z.boolean().default(false),
