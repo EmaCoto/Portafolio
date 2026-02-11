@@ -41,7 +41,7 @@ const posts = publishedPosts.map((post) => {
               <div class="p-6 md:p-8 flex flex-col justify-center flex-1 min-h-70">
                 <div class="flex items-center gap-3 mb-4">
                   <span class="text-[#72bf78] font-mono text-[9px] tracking-widest uppercase bg-[#72bf78]/10 px-3 py-1 rounded-full border border-[#72bf78]/20">{post.category}</span>
-                  <time class="text-white/20 font-mono text-[9px]">{post.date}</time>
+                  <time class="text-white font-mono text-[9px]">{post.date}</time>
                 </div>
                 <h3 class="text-white text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight mb-4 group-hover:text-[#72bf78] transition-colors italic">{post.title}</h3>
                 <p class="text-neutral-400 text-sm font-light leading-relaxed mb-8 max-w-[90%]">{post.description}</p>
@@ -59,15 +59,15 @@ const posts = publishedPosts.map((post) => {
     </div>
 
     <div class="flex items-center gap-8 mt-16">
-      <button id="prevBlog" class="group p-4 rounded-full border border-white/5 hover:border-[#72bf78]/40 text-white/20 hover:text-[#72bf78] transition-all disabled:opacity-5">
+      <button id="prevBlog" aria-label="Ver artículos anteriores" class="group p-4 rounded-full border border-white/5 hover:border-[#72bf78]/40 text-white/20 hover:text-[#72bf78] transition-all disabled:opacity-5">
         <svg class="w-6 h-6 rotate-180 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
       </button>
       <div class="flex items-center gap-2 font-mono text-[12px] tracking-tighter">
         <span id="currentNum" class="text-[#72bf78] font-bold text-lg">01</span>
-        <span class="text-white/10 text-xl">/</span>
-        <span id="totalNum" class="text-white/20">00</span>
+        <span class="text-white text-xl">/</span>
+        <span id="totalNum" class="text-white">00</span>
       </div>
-      <button id="nextBlog" class="group p-4 rounded-full border border-white/5 hover:border-[#72bf78]/40 text-white/20 hover:text-[#72bf78] transition-all disabled:opacity-5">
+      <button id="nextBlog" aria-label="Ver más artículos" class="group p-4 rounded-full border border-white/5 hover:border-[#72bf78]/40 text-white/20 hover:text-[#72bf78] transition-all disabled:opacity-5">
         <svg class="w-6 h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
       </button>
     </div>

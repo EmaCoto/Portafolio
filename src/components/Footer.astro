@@ -12,6 +12,7 @@ const quickLinks = [
   { name: "Proyectos", url: "/projects" },
   { name: "Conocimientos", url: "skills" },
   { name: "Blog", url: "/blog" },
+  { name: "Contacto", url: "/contact" },
 ];
 ---
 
@@ -23,7 +24,7 @@ const quickLinks = [
         <h2 class="text-white text-4xl md:text-5xl font-black uppercase italic tracking-tighter leading-none mb-6">
           ¿Tienes un proyecto <span class="text-[#72bf78]">en mente?</span>
         </h2>
-        <a href="mailto:tuemail@ejemplo.com" class="group flex items-center gap-4 text-white/40 hover:text-[#72bf78] transition-colors duration-500">
+        <a href="mailto:tuemail@ejemplo.com" class="group flex items-center gap-4 text-white/80 hover:text-[#72bf78] transition-colors duration-500">
           <span class="font-mono text-sm tracking-[0.3em] uppercase">Hablemos ahora</span>
           <div class="w-12 h-px bg-[#72bf78] group-hover:w-20 transition-all"></div>
         </a>
@@ -36,7 +37,7 @@ const quickLinks = [
           </div>
           <span class="text-white font-black tracking-tighter text-2xl uppercase italic">Emanuel<span class="text-[#72bf78]">.</span></span>
         </a>
-        <p class="text-white/30 font-mono text-[10px] uppercase tracking-widest text-left md:text-right leading-relaxed">
+        <p class="text-white/80 font-mono text-[10px] uppercase tracking-widest text-left md:text-right leading-relaxed">
           Desarrollador Web & <br/>Especialista en SEO Técnico.
         </p>
       </div>
@@ -79,13 +80,13 @@ const quickLinks = [
     </div>
 
     <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5">
-      <p class="text-white/20 font-mono text-[9px] uppercase tracking-[0.2em]">
+      <p class="text-white/60 font-mono text-[9px] uppercase tracking-[0.2em]">
         © {currentYear} Emanuel. Todos los derechos reservados.
       </p>
       
       <div class="flex items-center gap-8">
-        <a href="#" class="text-white/20 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-white transition-colors">Privacidad</a>
-        <a href="#" class="text-white/20 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-white transition-colors">Cookies</a>
+        <a href="#" class="text-white/60 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-white transition-colors">Privacidad</a>
+        <a href="#" class="text-white/60 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-white transition-colors">Cookies</a>
       </div>
     </div>
   </div>
@@ -98,7 +99,7 @@ const quickLinks = [
     @apply text-white font-mono text-[10px] uppercase tracking-[0.3em] mb-4;
   }
   .footer-link {
-    @apply text-white/70 text-sm font-light hover:text-[#72bf78] transition-all duration-300 w-fit cursor-none;
+    @apply text-white/70 text-sm font-light hover:text-[#72bf78] transition-all duration-300 w-fit cursor-pointer;
   }
   .footer-text {
     @apply text-white/70 text-sm font-light;
