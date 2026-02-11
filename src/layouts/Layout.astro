@@ -7,31 +7,96 @@ import "../style/global.css";
 import NavBar from "../components/NavBar.astro";
 
 interface Props {
-	title: string;
+    title: string;
+    description?: string; // La hacemos opcional con el "?"
 }
-const { title } = Astro.props;
+
+// Definimos un valor por defecto por si se te olvida ponerla en alguna página
+const { 
+    title = "Emanuel Cortes | Desarrollo Full Stack y SEO", 
+    description = "Desarrollo herramientas de captación de clientes de alto rendimiento. No hago simples webs; diseño sistemas técnicos optimizados en SEO que escalan tu negocio." 
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		<ClientRouter />
-	</head>
-	<body class="m-0 w-full h-full bg-[#0a0709]">
-		<CustomCursor />
-		<Particles />
-		<NavBar />
-		<main>
-			<slot />
-		</main>
-		<Footer />
-	</body>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={Astro.url} />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:image" content="/og-image.jpg" /> <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+        <meta name="generator" content={Astro.generator} />
+
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "Emanuel Cortes",
+				"url": "https://tu-dominio.com",
+				"jobTitle": "Full Stack Developer & SEO Specialist",
+				"description": "Especialista en desarrollo de herramientas de captación de alto rendimiento y sistemas técnicos optimizados.",
+				"knowsAbout": [
+				"Full Stack Development",
+				"SEO Técnico",
+				"Arquitectura de Software",
+				"Optimización de Conversión",
+				"Laravel",
+				"Astro"
+				],
+				"image": "https://tu-dominio.com/tu-foto.jpg",
+				"sameAs": [
+				"https://github.com/tu-usuario",
+				"https://linkedin.com/in/tu-usuario"
+				],
+				"hasOfferCatalog": {
+				"@type": "OfferCatalog",
+				"name": "Servicios de Desarrollo",
+				"itemListElement": [
+					{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Desarrollo de Herramientas de Captación"
+					}
+					},
+					{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Optimización SEO y Performance"
+					}
+					},
+					{
+					"@type": "Offer",
+					"itemOffered": {
+						"@type": "Service",
+						"name": "Desarrollo Web y Arquitectura de Software"
+					}
+					}
+				]
+				}
+			}
+		</script>
+        
+        <ClientRouter />
+    </head>
+    <body class="m-0 w-full h-full bg-[#0a0709]">
+        <CustomCursor />
+        <Particles />
+        <NavBar />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </body>
 </html>
