@@ -28,14 +28,14 @@ const doubleSkills = [...skills, ...skills];
   <div class="relative flex overflow-x-hidden group/marquee mt-10">
     <div class="py-12 animate-marquee flex whitespace-nowrap gap-12 items-center main-marquee" style="will-change: transform; backface-visibility: hidden;">
       {doubleSkills.map((skill) => (
-        <div class="skill-card relative flex flex-col items-center justify-center min-w-[120px] md:min-w-40 transition-all duration-500">
+        <div class="skill-card relative flex flex-col items-center justify-center min-w-30 md:min-w-40 transition-all duration-500">
           
           <div 
             class="skill-icon w-12 h-12 md:w-16 md:h-16 transition-all duration-500 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:block" 
             set:html={skill.svg}
           />
           
-          <span class="skill-name absolute -bottom-4 text-[#72bf78] font-mono text-[10px] uppercase tracking-[0.3em] transition-all duration-300 whitespace-nowrap opacity-100 translate-y-[10px] md:opacity-0 md:translate-y-0">
+          <span class="skill-name absolute -bottom-4 text-[#72bf78] font-mono text-[10px] uppercase tracking-[0.3em] transition-all duration-300 whitespace-nowrap opacity-100 translate-y-2.5 md:opacity-0 md:translate-y-0">
             {skill.name}
           </span>
         </div>

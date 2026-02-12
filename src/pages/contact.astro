@@ -5,15 +5,15 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
 ---
 
 <Layout title={title} description={description}>
-  <section id="ec-contact-section" class="ec-contact-wrapper relative py-24 overflow-hidden">
-    <div class="ec-contact-bg-glow absolute top-0 right-0 w-125 h-125 bg-[#72bf78]/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+  <section id="ec-contact-section" class="ec-contact-wrapper relative py-20 md:py-24 overflow-hidden bg-[#0a0709]">
+    <div class="ec-contact-bg-glow absolute top-0 right-0 w-64 h-64 md:w-125 md:h-125 bg-[#72bf78]/5 blur-[80px] md:blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
       
-      <div class="ec-contact-header mb-20 group/h1 relative">
-        <span class="ec-contact-badge text-[#72bf78] font-mono text-xs uppercase tracking-[0.5em] block mb-4">¿Hablamos?</span>
+      <div class="ec-contact-header mb-12 md:mb-20 group/h1 relative">
+        <span class="ec-contact-badge text-[#72bf78] font-mono text-[10px] md:text-xs uppercase tracking-[0.5em] block mb-4">¿Hablamos?</span>
         
-        <h1 class="ec-contact-title-container text-[15vw] md:text-[10vw] font-black text-white uppercase italic tracking-tighter leading-[0.9] relative overflow-visible pb-6">
+        <h1 class="ec-contact-title-container text-[14vw] sm:text-[12vw] md:text-[10vw] font-black text-white uppercase italic tracking-tighter leading-[0.85] relative overflow-visible pb-6">
           
           <div id="ec-text-main" class="flex flex-wrap items-center">
             { "CONTACTO".split('').map(char => ( <span class="ec-char inline-block">{char}</span> ))}
@@ -25,24 +25,24 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
             <span class="ec-char-thanks text-[#72bf78] inline-block translate-y-full">!</span>
           </div>
           
-          <span class="ec-contact-vida-effect block sm:inline-block">TRABAJEMOS</span>
+          <span class="ec-contact-vida-effect block lg:inline-block mt-2 lg:mt-0">TRABAJEMOS</span>
         </h1>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         <div class="lg:col-span-5 flex flex-col justify-between py-2">
           <div id="ec-info-container" class="ec-contact-info-block">
-            <p class="text-white/50 font-mono text-sm uppercase tracking-widest max-w-sm leading-relaxed mb-12">
+            <p class="text-white/50 font-mono text-xs md:text-sm uppercase tracking-widest max-w-sm leading-relaxed mb-8 md:mb-12">
               Transformo ideas complejas en soluciones digitales de alto rendimiento. Escríbeme para iniciar tu próximo paso.
             </p>
-            <div class="ec-contact-methods space-y-10">
-              <div class="ec-contact-method-item group">
-                <p class="text-[10px] font-mono text-[#72bf78] uppercase tracking-[0.3em] mb-2">Directo</p>
-                <a href="mailto:emanuelcortesochoa@gmail.com" class="ec-contact-link text-xl md:text-3xl text-white font-bold hover:text-[#72bf78] transition-all duration-300">
+            <div class="ec-contact-methods space-y-8 md:space-y-10">
+              <div class="ec-contact-method-item group flex flex-col gap-4">
+                <p class="text-[10px] font-mono text-[#72bf78] uppercase tracking-[0.3em]">Directo</p>
+                <a href="mailto:emanuelcortesochoa@gmail.com" class="ec-contact-link text-lg sm:text-xl md:text-3xl text-white font-bold hover:text-[#72bf78] transition-all duration-300 break-all leading-tight">
                   emanuelcortesochoa@gmail.com
                 </a>
                 <a href="https://wa.link/pa3hoa" class="ec-contact-link text-xl md:text-3xl text-white font-bold hover:text-[#72bf78] transition-all duration-300">
-                  +57 300 627 7693
+                  +57 300 6277693
                 </a>
               </div>
             </div>
@@ -51,8 +51,8 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
 
         <div class="lg:col-span-7">
           <div id="ec-form-wrapper">
-            <form id="ec-unique-form" class="ec-contact-form space-y-8 bg-[#0d0d0d] p-8 md:p-14 rounded-3xl border border-white/5 shadow-2xl">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <form id="ec-unique-form" class="ec-contact-form space-y-8 bg-[#0d0d0d] p-6 sm:p-10 md:p-14 rounded-3xl border border-white/5 shadow-2xl">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
                 <div class="ec-input-group relative group">
                   <input type="text" id="ec-name" name="name" required class="ec-form-input" placeholder=" " />
                   <label for="ec-name" class="ec-form-label">Nombre</label>
@@ -69,7 +69,7 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
                 <label for="ec-message" class="ec-form-label">¿Cómo puedo ayudarte?</label>
                 <div class="ec-form-line"></div>
               </div>
-              <button type="submit" class="ec-submit-btn w-full group relative py-6 bg-[#72bf78] text-[#0a0709] font-black uppercase italic tracking-[0.3em] text-xs overflow-hidden rounded-sm transition-all hover:scale-[1.01] active:scale-95 cursor-pointer border-none">
+              <button type="submit" class="ec-submit-btn w-full group relative py-6 bg-[#72bf78] text-[#0a0709] font-black uppercase italic tracking-[0.3em] text-[10px] md:text-xs overflow-hidden rounded-sm transition-all hover:scale-[1.01] active:scale-95 cursor-pointer border-none outline-none">
                 <span class="relative z-10">Enviar Propuesta</span>
                 <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
               </button>
@@ -85,23 +85,49 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
   @reference "../style/global.css";
 
   .ec-contact-vida-effect {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+    -webkit-text-stroke: 1px rgba(114, 191, 120, 0.4);
     color: transparent;
     transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    padding-right: 0.2em; /* Espacio extra para que no se corte la itálica */
+    padding-right: 0.1em;
   }
 
-  .ec-contact-header:hover .ec-contact-vida-effect {
-    -webkit-text-stroke: 1px #72bf78;
-    color: #72bf78;
-    text-shadow: 0 0 30px rgba(114, 191, 120, 0.4);
+  /* En móviles el efecto brilla por defecto */
+  @media (max-width: 1024px) {
+    .ec-contact-vida-effect {
+      -webkit-text-stroke: 1px #72bf78;
+      color: #72bf78;
+      text-shadow: 0 0 15px rgba(114, 191, 120, 0.3);
+    }
   }
 
-  .ec-form-input { @apply w-full bg-transparent border-b border-white/10 py-4 text-white font-mono text-sm outline-none transition-all focus:border-[#72bf78]/50; }
+  /* En desktop el efecto se activa con hover */
+  @media (min-width: 1025px) {
+    .ec-contact-header:hover .ec-contact-vida-effect {
+      -webkit-text-stroke: 1px #72bf78;
+      color: #72bf78;
+      text-shadow: 0 0 30px rgba(114, 191, 120, 0.4);
+    }
+  }
+
+  .ec-form-input { 
+    @apply w-full bg-transparent border-b border-white/10 py-4 text-white font-mono text-sm outline-none transition-all focus:border-[#72bf78]/50; 
+    /* Evitar zoom en iOS */
+    font-size: 16px; 
+  }
+
+  @media (min-width: 768px) {
+    .ec-form-input { font-size: 0.875rem; }
+  }
+
   .ec-form-label { @apply absolute left-0 top-4 text-white/30 font-mono text-[10px] uppercase tracking-widest transition-all pointer-events-none; }
   .ec-form-input:focus ~ .ec-form-label, .ec-form-input:not(:placeholder-shown) ~ .ec-form-label { @apply -top-4 text-[#72bf78] text-[9px] font-bold; }
   .ec-form-line { @apply absolute bottom-0 left-0 w-0 h-px bg-[#72bf78] transition-all duration-700; }
   .ec-form-input:focus ~ .ec-form-line { @apply w-full; }
+
+  /* Asegurar que la itálica del título no se corte */
+  .ec-char, .ec-char-thanks {
+    padding-right: 0.05em;
+  }
 </style>
 
 <script>
@@ -114,13 +140,22 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
     const form = document.querySelector("#ec-unique-form") as HTMLFormElement;
     if (!section || !form) return;
 
+    // Animación de entrada de caracteres
     gsap.from(".ec-char", {
       y: 100, opacity: 0, duration: 1, stagger: 0.05, ease: "expo.out",
-      scrollTrigger: { trigger: section, start: "top 70%" }
+      scrollTrigger: { 
+        trigger: section, 
+        start: "top 80%",
+        toggleActions: "play none none none" 
+      }
     });
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      // Desactivar botón para evitar múltiples envíos
+      const btn = form.querySelector('button');
+      if (btn) btn.setAttribute('disabled', 'true');
+
       const thanksTl = gsap.timeline();
       
       thanksTl
@@ -134,14 +169,14 @@ const description = "¿Listo para escalar? Solicita una propuesta para desarroll
              const wrapper = document.querySelector("#ec-form-wrapper");
              if (wrapper) {
                wrapper.innerHTML = `
-                <div class="flex flex-col items-center justify-center h-full text-center p-12 bg-[#72bf78]/5 rounded-3xl border border-[#72bf78]/20">
+                <div class="flex flex-col items-center justify-center h-full min-h-[400px] text-center p-8 md:p-12 bg-[#72bf78]/5 rounded-3xl border border-[#72bf78]/20">
                   <div class="w-16 h-16 bg-[#72bf78] rounded-full flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(114,191,120,0.4)]">
                     <svg class="w-8 h-8 text-[#0a0709]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   </div>
-                  <h4 class="text-white text-3xl font-black italic uppercase">¡Mensaje Recibido!</h4>
-                  <p class="text-white/40 font-mono text-[10px] uppercase tracking-[0.2em] mt-2">Hablamos pronto.</p>
+                  <h4 class="text-white text-2xl md:text-3xl font-black italic uppercase leading-tight">¡Mensaje Recibido!</h4>
+                  <p class="text-white/40 font-mono text-[10px] uppercase tracking-[0.2em] mt-4">Analizaré tu propuesta y te contactaré en breve.</p>
                 </div>`;
-               gsap.from(wrapper, { opacity: 0, scale: 0.9, duration: 0.8 });
+               gsap.from(wrapper, { opacity: 0, scale: 0.9, duration: 0.8, ease: "back.out(1.7)" });
              }
           }
         }, "-=1");

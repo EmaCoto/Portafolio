@@ -14,7 +14,6 @@ const posts = allPosts
     description: post.data.description,
     slug: post.slug,
     date: post.data.pubDate.toLocaleDateString("es-ES", { year: "numeric", month: "short", day: "2-digit" }),
-    // Solución al error de la imagen (.src) usando casting de tipo
     image: typeof post.data.heroImage === 'string' ? post.data.heroImage : (post.data.heroImage as any)?.src || '',
     category: post.data.tags?.[0] || "General"
   }));
@@ -24,71 +23,74 @@ const description = "Artículos sobre desarrollo Full Stack, optimización técn
 ---
 
 <Layout title={title} description={description}>
-  <section class="max-w-7xl mx-auto px-6 py-24 bg-[#0a0709]">
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-20 md:py-24 bg-[#0a0709]">
     
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20">
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-12 md:mb-20">
       <div class="space-y-2">
-        <h1 class="text-6xl md:text-7xl font-black text-white uppercase italic tracking-tighter leading-none">
+        <h1 class="text-6xl sm:text-7xl lg:text-8xl font-black text-white uppercase italic tracking-tighter leading-[0.8]">
           Diario
         </h1>
-        <p class="text-[#72bf78] font-mono text-sm tracking-[0.3em] uppercase">
+        <p class="text-[#72bf78] font-mono text-[10px] sm:text-sm tracking-[0.3em] uppercase">
           Blog & Artículos Seleccionados
         </p>
       </div>
 
-      <div class="relative w-full md:w-96 group">
+      <div class="relative w-full lg:w-96 group">
         <input 
           type="text" 
           id="searchInput"
           placeholder="BUSCAR ARTÍCULO..." 
           class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 text-white font-mono text-xs tracking-widest focus:outline-none focus:border-[#72bf78]/40 transition-all placeholder:text-white/20"
         />
+        <div class="absolute right-6 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-[#72bf78] transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
       </div>
     </div>
 
-    <div id="blogGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div id="blogGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
       {posts.map((post) => (
         <article 
-          class="blog-item group relative bg-[#0d0d0d] rounded-3xl border border-white/5 overflow-hidden flex flex-col md:flex-row transition-all hover:border-[#72bf78]/30 shadow-2xl"
+          class="blog-item group relative bg-[#0d0d0d] rounded-2xl md:rounded-3xl border border-white/5 overflow-hidden flex flex-col md:flex-row transition-all hover:border-[#72bf78]/30 shadow-2xl"
           data-search={(`${post.title} ${post.description} ${post.category}`).toLowerCase()}
         >
           <div class="relative w-full md:w-[40%] aspect-video md:aspect-auto overflow-hidden shrink-0">
             <img 
               src={post.image} 
               alt={post.title} 
-              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-100"
+              class="w-full h-full object-cover transition-all duration-700 md:grayscale md:opacity-40 group-hover:scale-110 md:group-hover:grayscale-0 md:group-hover:opacity-100"
             />
-            <div class="absolute inset-0 bg-linear-to-t md:bg-linear-to-r from-[#0d0d0d] via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-t md:bg-linear-to-r from-[#0d0d0d] via-transparent to-transparent opacity-90 md:opacity-100"></div>
           </div>
 
-          <div class="p-8 flex flex-col justify-center flex-1">
+          <div class="p-6 sm:p-8 flex flex-col justify-center flex-1">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-[#72bf78] font-mono text-[10px] tracking-widest uppercase bg-[#72bf78]/10 px-3 py-1 rounded-full border border-[#72bf78]/20">
+              <span class="text-[#72bf78] font-mono text-[9px] tracking-widest uppercase bg-[#72bf78]/10 px-3 py-1 rounded-full border border-[#72bf78]/20">
                 {post.category}
               </span>
-              <time class="text-white/80 font-mono text-[10px]">
+              <time class="text-white/50 font-mono text-[9px]">
                 {post.date}
               </time>
             </div>
 
-            <h3 class="text-white text-xl font-black uppercase tracking-tighter leading-tight mb-4 group-hover:text-[#72bf78] transition-colors italic">
+            <h3 class="text-white text-xl sm:text-2xl font-black uppercase tracking-tighter leading-tight mb-4 group-hover:text-[#72bf78] transition-colors italic">
               {post.title}
             </h3>
 
-            <p class="text-white/80 text-sm font-light leading-relaxed mb-8">
+            <p class="text-white/70 text-xs sm:text-sm font-light leading-relaxed mb-6 line-clamp-3 md:line-clamp-none">
               {post.description}
             </p>
 
-            <a href={`/blog/${post.slug}/`} class="group/btn inline-flex items-center gap-4 text-white font-mono text-[11px] tracking-[0.3em] uppercase mt-auto">
+            <a href={`/blog/${post.slug}/`} class="group/btn inline-flex items-center gap-4 text-white font-mono text-[10px] tracking-[0.3em] uppercase mt-auto">
               <span>Leer artículo</span>
-              <div class="w-10 h-px bg-white/20 group-hover/btn:bg-[#72bf78] group-hover/btn:w-16 transition-all duration-500"></div>
+              <div class="w-8 h-px bg-white/20 group-hover/btn:bg-[#72bf78] group-hover/btn:w-16 transition-all duration-500"></div>
             </a>
           </div>
         </article>
       ))}
     </div>
 
-    <div id="noResults" class="hidden py-32 text-center text-white/20 font-mono text-xs uppercase tracking-[0.5em]">
+    <div id="noResults" class="hidden py-32 text-center text-white/20 font-mono text-[10px] uppercase tracking-[0.5em]">
       No se encontraron artículos
     </div>
 
@@ -96,24 +98,47 @@ const description = "Artículos sobre desarrollo Full Stack, optimización técn
 </Layout>
 
 <script>
-  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-  const cards = document.querySelectorAll('.blog-item');
-  const noResults = document.getElementById('noResults');
+  const setupSearch = () => {
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    const cards = document.querySelectorAll('.blog-item');
+    const noResults = document.getElementById('noResults');
 
-  searchInput?.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
-    let found = 0;
+    searchInput?.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      let found = 0;
 
-    cards.forEach(card => {
-      const searchText = (card as HTMLElement).dataset.search || '';
-      if (searchText.includes(query)) {
-        (card as HTMLElement).style.display = 'flex';
-        found++;
-      } else {
-        (card as HTMLElement).style.display = 'none';
+      cards.forEach(card => {
+        const searchText = (card as HTMLElement).dataset.search || '';
+        if (searchText.includes(query)) {
+          (card as HTMLElement).style.display = 'flex';
+          found++;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (noResults) {
+        noResults.style.display = found === 0 ? 'block' : 'none';
       }
     });
+  };
 
-    if (noResults) noResults.style.display = found === 0 ? 'block' : 'none';
-  });
+  setupSearch();
+  document.addEventListener('astro:after-swap', setupSearch);
 </script>
+
+<style>
+  @reference "../../style/global.css";
+  
+  /* Evitar que el input de búsqueda haga zoom automático en iOS */
+  @media screen and (max-width: 768px) {
+    input[type="text"] {
+      font-size: 16px; 
+    }
+  }
+
+  /* Mejora de escala en pantallas muy pequeñas */
+  @media (max-width: 400px) {
+    h1 { font-size: 3.8rem; }
+  }
+</style>
