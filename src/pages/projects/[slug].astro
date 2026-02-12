@@ -14,7 +14,7 @@ const { project } = Astro.props;
 const { Content } = await project.render();
 ---
 
-<Layout title={`${project.data.title} | Emanuel`}>
+<Layout title={`${project.data.title} | Emanuel`} description={project.data.description}>
   <main class="bg-[#0a0709] min-h-screen pt-40 pb-20 text-white">
     <article class="max-w-4xl mx-auto px-6">
       <div class="prose prose-invert prose-green max-w-none prose-headings:italic prose-headings:font-black prose-p:text-white/60">
