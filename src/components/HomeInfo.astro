@@ -4,9 +4,9 @@ import miFoto from '../assets/img/photo_emanuel_cortes_ochoa.webp';
 ---
 
 <div id="wrapper-entrada" class="relative w-full overflow-hidden pt-10">
-  <main id="main-content" class="w-full min-h-screen text-[#ffffff] relative flex items-center py-20 md:py-0">
+  <main id="main-content" class="w-full min-h-screen text-[#ffffff] relative flex items-center pt-20 md:py-0">
     <section class="w-full px-6 md:px-10">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div class="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         
         <div class="lg:col-span-4 lg:order-last relative flex justify-center order-first">
           <div id="hero-image-wrapper" class="relative w-full max-w-[320px] sm:max-w-100 lg:max-w-none aspect-4/5">
@@ -35,7 +35,7 @@ import miFoto from '../assets/img/photo_emanuel_cortes_ochoa.webp';
           
           <h1 id="hero-title" class="text-[12vw] sm:text-[10vw] lg:text-[8.5vw] font-black leading-[0.9] lg:leading-[0.82] tracking-tighter uppercase text-[#ffffff] mb-8 sm:mb-10">
             CÓDIGO <br class="hidden sm:block"/> QUE COBRA <br/> 
-            <span class="text-neutral-800 italic outline-text block sm:inline">VIDA.</span>
+            <span class="outline-text block sm:inline animate-pulse-mobile lg:animate-none">VIDA.</span>
           </h1>
 
           <div id="hero-cta" class="flex flex-col sm:flex-row gap-6 items-center justify-center lg:justify-start">
@@ -62,7 +62,6 @@ import miFoto from '../assets/img/photo_emanuel_cortes_ochoa.webp';
   import { gsap } from "gsap";
 
   const initHeroAnimation = () => {
-    // Animación suave de entrada de los elementos del Hero (sin bloqueo de pantalla)
     const tl = gsap.timeline();
 
     tl.from("#hero-sub", {
@@ -92,9 +91,7 @@ import miFoto from '../assets/img/photo_emanuel_cortes_ochoa.webp';
     }, "-=1");
   };
 
-  // Iniciar al cargar
   initHeroAnimation();
-  // Reiniciar tras navegación en Astro
   document.addEventListener("astro:after-swap", initHeroAnimation);
 </script>
 
@@ -107,10 +104,38 @@ import miFoto from '../assets/img/photo_emanuel_cortes_ochoa.webp';
     transition: all 0.5s ease;
   }
   
-  #hero-title:hover .outline-text {
-    -webkit-text-stroke: 1px #72bf78;
-    color: #72bf78;
-    text-shadow: 0 0 20px rgba(114, 191, 120, 0.3);
+  /* El hover solo se activa en dispositivos que soportan hover (desktop) */
+  @media (hover: hover) {
+    #hero-title:hover .outline-text {
+      -webkit-text-stroke: 1px #72bf78;
+      color: #72bf78;
+      text-shadow: 0 0 20px rgba(114, 191, 120, 0.3);
+    }
+  }
+
+  /* Animación de pulso para Mobile */
+  @keyframes pulse-mobile {
+    0%, 100% { 
+      -webkit-text-stroke: 1px rgba(255,255,255,0.1);
+      color: transparent;
+      text-shadow: none;
+    }
+    50% { 
+      -webkit-text-stroke: 1px #72bf78;
+      color: #72bf78;
+      text-shadow: 0 0 15px rgba(114, 191, 120, 0.3);
+    }
+  }
+
+  .animate-pulse-mobile {
+    animation: pulse-mobile 3s ease-in-out infinite;
+  }
+
+  /* Desactivar pulso en Desktop (lg) */
+  @media (min-width: 1024px) {
+    .animate-pulse-mobile {
+      animation: none;
+    }
   }
 
   @media (max-width: 380px) {

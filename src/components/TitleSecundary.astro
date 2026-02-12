@@ -1,26 +1,28 @@
 ---
 interface Props {
   span: string;
-	h2: string;
+  h2: string;
 }
 const { h2, span } = Astro.props;
 ---
 
 <div class="max-w-fit px-6 mb-10 relative group/title">
     <div class="flex items-center gap-4">
-      <div class="relative h-10 w-1 bg-[#72bf78]/20 overflow-hidden hidden md:block">
+      <div class="relative h-10 w-1 bg-[#72bf78]/20 overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full bg-[#72bf78] animate-scanline"></div>
       </div>
       
       <div class="relative">
-        <span class="text-[#72bf78] font-mono text-xs tracking-[0.4em] uppercase opacity-70 group-hover/title:opacity-100 transition-opacity">
+        <span class="text-[#72bf78] font-mono text-xs tracking-[0.4em] uppercase transition-opacity opacity-100 md:opacity-70 md:group-hover/title:opacity-100">
           {span}
         </span>
-        <div class="relative overflow-hidden">
-          <h2 class="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter transition-all duration-300 group-hover/title:translate-x-2">
+        
+        <div class="relative">
+          <h2 class="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter transition-all duration-300 translate-x-2 md:translate-x-0 md:group-hover/title:translate-x-2 pr-2">
             {h2}<span class="text-[#72bf78]">.</span>
           </h2>
-          <span class="absolute top-0 left-0 text-white uppercase tracking-tighter text-2xl md:text-4xl font-black opacity-0 group-hover/title:opacity-30 group-hover/title:animate-glitch pointer-events-none">
+
+          <span class="absolute top-0 left-0 text-white uppercase tracking-tighter text-2xl md:text-4xl font-black pointer-events-none opacity-30 md:opacity-0 md:group-hover/title:opacity-30 animate-glitch md:animate-none md:group-hover/title:animate-glitch">
             {h2}
           </span>
         </div>
@@ -28,11 +30,13 @@ const { h2, span } = Astro.props;
     </div>
     
     <div class="mt-4 h-0.5 w-full max-w-md bg-white/5 relative overflow-hidden">
-      <div class="absolute top-0 left-0 h-full w-0 bg-[#72bf78] group-hover/title:w-full transition-all duration-700 ease-out"></div>
+      <div class="absolute top-0 left-0 h-full bg-[#72bf78] transition-all duration-700 ease-out w-full md:w-0 md:group-hover/title:w-full"></div>
     </div>
 </div>
 
 <style>
+  @reference "../style/global.css";
+
   /* Animación de escaneo para la barra vertical */
   @keyframes scanline {
     0% { transform: translateY(-100%); }
@@ -43,7 +47,7 @@ const { h2, span } = Astro.props;
     animation: scanline 2s linear infinite;
   }
 
-  /* Efecto Glitch sutil para el título */
+  /* Efecto Glitch */
   @keyframes glitch {
     0% { transform: translate(0); }
     20% { transform: translate(-2px, 2px); }
@@ -53,11 +57,11 @@ const { h2, span } = Astro.props;
     100% { transform: translate(0); }
   }
 
-  .group-hover\/title\:animate-glitch {
+  .animate-glitch {
     animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both infinite;
   }
 
-  /* Mejora del contenedor general de la sección para dar aire */
+  /* Mantengo tu padding original de sección */
   section {
     padding-top: 100px;
     padding-bottom: 100px;
