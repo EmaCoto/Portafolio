@@ -43,7 +43,7 @@ const quickLinks = [
           </div>
           <span class="text-white font-black tracking-tighter text-xl sm:text-2xl uppercase italic">Emanuel Cortes<span class="text-[#72bf78]">.</span></span>
         </a>
-        <p class="text-white/60 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-left md:text-right leading-relaxed max-w-[200px] md:max-w-none">
+        <p class="text-white/60 font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-left md:text-right leading-relaxed max-w-50 md:max-w-none">
           Desarrollador Web & <br class="hidden sm:block"/>Especialista en SEO Técnico.
         </p>
       </div>
@@ -64,7 +64,7 @@ const quickLinks = [
         <div class="flex flex-col gap-3">
           {socialLinks.map(social => (
             <a href={social.url} target="_blank" class="footer-link flex items-center gap-3 group">
-               <div class="text-white/40 group-hover:text-[#72bf78] transition-colors shrink-0" set:html={social.svg} />
+               <div class="text-white/80 group-hover:text-[#72bf78] transition-colors shrink-0" set:html={social.svg} />
                <span>{social.name}</span>
             </a>
           ))}
@@ -94,13 +94,13 @@ const quickLinks = [
     </div>
 
     <div class="flex flex-col md:flex-row justify-between items-center gap-8 pt-8 border-t border-white/5">
-      <p class="text-white/40 font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-center md:text-left">
+      <p class="text-white/80 font-mono text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-center md:text-left">
         © {currentYear} Emanuel Cortes | <br class="sm:hidden"/> Todos los derechos reservados.
       </p>
       
       <div class="flex items-center gap-6 sm:gap-8">
-        <a href="#" class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-[#72bf78] transition-colors">Privacidad</a>
-        <a href="#" class="text-white/40 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-[#72bf78] transition-colors">Cookies</a>
+        <a href="#" class="text-white/80 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-[#72bf78] transition-colors">Privacidad</a>
+        <a href="#" class="text-white/80 font-mono text-[9px] uppercase tracking-[0.2em] hover:text-[#72bf78] transition-colors">Cookies</a>
       </div>
     </div>
   </div>
@@ -121,9 +121,6 @@ const quickLinks = [
   .footer-stack-icon {
     @apply transition-transform hover:scale-125 duration-300;
   }
-
-  /* Nota: He omitido el contenido largo de los SVGs del stack para brevedad, 
-     mantén los que ya tenías en tu código original. */
 </style>
 
 <script>
