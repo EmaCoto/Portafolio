@@ -1,0 +1,68 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "404 — Página no encontrada | Emanuel Cortes";
+const description = "Parece que te has perdido en el código. Regresemos al camino del alto rendimiento.";
+---
+
+<Layout title={title} description={description}>
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0709] px-6">
+    <div class="absolute inset-0 z-0">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#72bf78]/5 blur-[120px] rounded-full"></div>
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+    </div>
+
+    <div class="relative z-10 text-center space-y-12">
+      <div class="relative inline-block">
+        <h1 class="text-[25vw] md:text-[15vw] font-black italic leading-none tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white to-white/10 uppercase">
+          404
+        </h1>
+        <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-full text-[#72bf78] font-mono text-[10px] md:text-xs uppercase tracking-[0.5em] whitespace-nowrap animate-pulse">
+          Error de arquitectura
+        </span>
+      </div>
+
+      <div class="max-w-md mx-auto space-y-6">
+        <h2 class="text-white text-2xl md:text-4xl font-black italic uppercase tracking-tighter">
+          TE HAS SALIDO DEL <span class="text-[#72bf78]">MAPA</span>.
+        </h2>
+        <p class="text-white/50 font-mono text-sm leading-relaxed">
+          La ruta que buscas no existe o ha sido optimizada hasta desaparecer. No dejes que un enlace roto detenga tu proyecto.
+        </p>
+      </div>
+
+      <div class="pt-8">
+        <a 
+          href="/" 
+          class="inline-block group relative px-12 py-5 bg-[#72bf78] text-[#0a0709] font-black uppercase italic tracking-[0.2em] text-xs overflow-hidden rounded-sm transition-all hover:scale-105 active:scale-95"
+        >
+          <span class="relative z-10">Volver al Inicio</span>
+          <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-10 left-10 hidden md:block">
+        <p class="text-white/20 font-mono text-[10px] uppercase tracking-widest">
+            LOC: 6.2442° N, 75.5812° W <br/>
+            STATUS: REDIRECT_REQUIRED
+        </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @reference "../style/global.css";
+
+  /* Efecto de parpadeo suave para el fondo */
+  h1 {
+    animation: textGlitch 5s infinite;
+  }
+
+  @keyframes textGlitch {
+    0%, 100% { opacity: 1; transform: skew(0deg); }
+    95% { opacity: 0.8; transform: skew(2deg); }
+    96% { opacity: 1; transform: skew(-2deg); }
+    97% { opacity: 0.9; transform: skew(0deg); }
+  }
+</style>

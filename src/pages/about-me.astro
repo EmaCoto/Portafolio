@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import miFoto from '../../public/img/photo-emanuel-cortes-ochoa.webp';
+import miFoto2 from '../../public/img/photo-performace-pagespeed.webp';
 import SkillsAboutMe from "../components/SkillsAboutMe.astro";
 import Layout from "../layouts/Layout.astro";
 
@@ -86,10 +87,10 @@ const description = "Desarrollador Full Stack de Medellín, Colombia. Especialis
             
             <div class="lg:col-span-8">
                 <div class="relative group rounded-xl overflow-hidden border border-white/10 shadow-xl">
-                    <img 
-                        src="../../public/img/photo-performace-pagespeed.webp" 
-                        alt="Resultados de PageSpeed Insights" 
-                        class="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                    <Image 
+                        src={miFoto2} 
+                        alt="Resultados de Google PageSpeed Insights" 
+                        class="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-1000"
                     />
                     <div class="absolute inset-0 bg-linear-to-t from-[#0d0d0d] via-transparent to-transparent opacity-40"></div>
                 </div>
