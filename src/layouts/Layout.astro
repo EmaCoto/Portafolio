@@ -26,22 +26,31 @@ const {
         <meta name="viewport" content="width=device-width" />
         
         <title>{title}</title>
+		<meta property="og:site_name" content="Emanuel Cortes" />
+		<meta property="og:locale" content="es_ES" />
+		<meta name="author" content="Emanuel Cortes" />
         <meta name="description" content={description} />
-        <link rel="canonical" href={Astro.url} />
-
+        <link rel="canonical" href={Astro.url.href} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta property="og:image" content="https://emanuelcortesochoa.netlify.app/img/miniaturas/mini-home.webp" />
+		<meta name="twitter:image" content="https://emanuelcortesochoa.netlify.app/img/miniaturas/mini-home.webp" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={Astro.url} />
-        <meta property="og:image" content="/og-image.jpg" /> <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
+		<meta property="og:url" content={Astro.url.href} />
+        <link rel="icon" href="/favicon.ico?v=2" sizes="any" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
         <meta name="generator" content={Astro.generator} />
 
 		<script type="application/ld+json">
+		[			
 			{
 				"@context": "https://schema.org",
 				"@type": "Person",
 				"name": "Emanuel Cortes",
+				"@id": "https://emanuelcortesochoa.netlify.app/#person",
 				"url": "https://emanuelcortesochoa.netlify.app/",
 				"jobTitle": "Full Stack Developer & SEO Specialist",
 				"description": "Especialista en desarrollo de herramientas de captación de alto rendimiento y sistemas técnicos optimizados.",
@@ -53,11 +62,28 @@ const {
 				"Laravel",
 				"Astro"
 				],
-				"image": "https://tu-dominio.com/tu-foto.jpg",
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"contactType": "business",
+					"email": "emanuelcortesochoa@gmail.com",
+					"availableLanguage": ["Spanish"]
+				},
+				"image": {
+					"@type": "ImageObject",
+					"url": "https://emanuelcortesochoa.netlify.app/img/miniaturas/mini-home.webp"
+				},
+				  "worksFor": {
+					"@type": "Organization",
+					"name": "Emanuel Cortes Development"
+				},
 				"sameAs": [
 				"https://github.com/EmaCoto",
 				"https://linkedin.com/in/emanuel-cortés-ochoa-a481982b7"
 				],
+				"areaServed": {
+					"@type": "Place",
+					"name": "Latinoamérica y mercado internacional"
+				},
 				"hasOfferCatalog": {
 				"@type": "OfferCatalog",
 				"name": "Servicios de Desarrollo",
@@ -85,7 +111,19 @@ const {
 					}
 				]
 				}
+			},
+			{
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				"@id": "https://emanuelcortesochoa.netlify.app/#website",
+				"url": "https://emanuelcortesochoa.netlify.app/",
+				"name": "Emanuel Cortes",
+				"inLanguage": "es",
+				"publisher": {
+					"@id": "https://emanuelcortesochoa.netlify.app/#person"
+				}
 			}
+		]
 		</script>
         
         <ClientRouter />
