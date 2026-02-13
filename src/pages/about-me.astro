@@ -1,0 +1,146 @@
+---
+import { Image } from 'astro:assets';
+import miFoto from '../../public/img/photo-emanuel-cortes-ochoa.webp';
+import SkillsAboutMe from "../components/SkillsAboutMe.astro";
+import Layout from "../layouts/Layout.astro";
+
+// LÓGICA PARA LA EDAD AUTOMÁTICA
+const birthDate = new Date('2004-05-06');
+const today = new Date();
+let age = today.getFullYear() - birthDate.getFullYear();
+const m = today.getMonth() - birthDate.getMonth();
+if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+}
+
+const title = "Emanuel Cortes | Sobre Mí — Código, Estrategia y Rendimiento";
+const description = "Desarrollador Full Stack de Medellín, Colombia. Especialista en crear soluciones digitales de alto impacto con un enfoque obsesivo en el rendimiento.";
+---
+
+<Layout title={title} description={description}>
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+        <div class="absolute top-[10%] left-[-10%] md:w-125 md:h-125 bg-[#72bf78]/20 blur-[120px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
+        <div class="space-y-8">
+          <div>
+            <span class="inline-block px-3 py-1 rounded-full border border-[#72bf78]/30 text-[#72bf78] font-mono text-[10px] uppercase tracking-widest mb-6">
+              Full Stack Developer • {age} Años
+            </span>
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter leading-[0.85] mb-6">
+              Emanuel Cortes<span class="text-[#72bf78]">.</span>
+            </h1>
+            <p class="text-white/60 font-mono text-sm tracking-widest uppercase">Medellín, Colombia</p>
+          </div>
+          
+          <div class="space-y-6 text-white/80 font-light text-lg text-justify leading-relaxed max-w-xl">
+            <p>
+                Soy un desarrollador apasionado por la intersección entre el diseño minimalista y la arquitectura técnica robusta. Mi enfoque no es solo escribir código, sino construir herramientas de captación que escalen negocios.
+            </p>
+            <p>
+                Cuando no estoy frente a la pantalla optimizando tiempos de carga, me encontrarás haciendo deporte, explorando nuevas tendencias musicales o diseñando estrategias de SEO técnico.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative group">
+            <div class="absolute -inset-1 bg-linear-to-r from-[#72bf78] to-emerald-900 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <div class="relative overflow-hidden rounded-xl bg-[#0d0d0d] border border-white/10">
+                <div class="w-full h-full overflow-hidden bg-neutral-900 grayscale hover:grayscale-0 transition-all duration-700 rounded-sm border border-white/10 shadow-2xl">
+                    <Image 
+                        src={miFoto} 
+                        alt="Emanuel Cortes" 
+                        class="w-full h-full object-cover object-center scale-110 hover:scale-100 transition-transform duration-1000"
+                    />
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="bg-[#0d0d0d] rounded-xl p-8 md:p-16 border border-white/5">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-4 space-y-6">
+                <h2 class="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter">Obsesión por la <span class="text-[#72bf78]">Velocidad</span></h2>
+                <p class="text-white/50 font-mono text-sm leading-relaxed text-justify">
+                    Un sitio web lento es un negocio que pierde dinero. Mis desarrollos mantienen puntajes de 100/100 en Google PageSpeed Insights, garantizando la mejor experiencia de usuario y posicionamiento SEO.
+                </p>
+                <div class="flex gap-4">
+                    <div class="text-center">
+                        <span class="block text-[#72bf78] text-3xl font-black italic">0.6s</span>
+                        <span class="text-[9px] uppercase text-white/40 tracking-widest">LCP Promedio</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-[#72bf78] text-3xl font-black italic">100</span>
+                        <span class="text-[9px] uppercase text-white/40 tracking-widest">Performance</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block text-[#72bf78] text-3xl font-black italic">100</span>
+                        <span class="text-[9px] uppercase text-white/40 tracking-widest">SEO</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-8">
+                <div class="relative group rounded-xl overflow-hidden border border-white/10 shadow-xl">
+                    <img 
+                        src="../../public/img/photo-performace-pagespeed.webp" 
+                        alt="Resultados de PageSpeed Insights" 
+                        class="w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div class="absolute inset-0 bg-linear-to-t from-[#0d0d0d] via-transparent to-transparent opacity-40"></div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <div>
+        <SkillsAboutMe />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-8 rounded-xl bg-white/2 bg-linear-to-br from-white/5 to-transparent border border-white/5">
+            <div class="w-10 h-10 bg-[#72bf78]/10 rounded-lg flex items-center justify-center mb-6 text-[#72bf78]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">Desarrollo</h3>
+            <p class="text-white/50 font-light text-sm leading-relaxed">Experticia en el stack moderno: React, Next.js, Astro, y arquitecturas escalables de Backend.</p>
+        </div>
+
+        <div class="p-8 rounded-xl bg-white/2 bg-linear-to-br from-white/5 to-transparent border border-white/5">
+            <div class="w-10 h-10 bg-[#72bf78]/10 rounded-lg flex items-center justify-center mb-6 text-[#72bf78]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">SEO Técnico</h3>
+            <p class="text-white/50 font-light text-sm leading-relaxed">Optimización de Core Web Vitals, indexación semántica y estructuración de datos avanzada.</p>
+        </div>
+
+        <div class="p-8 rounded-xl bg-white/2 bg-linear-to-br from-white/5 to-transparent border border-white/5">
+            <div class="w-10 h-10 bg-[#72bf78]/10 rounded-lg flex items-center justify-center mb-6 text-[#72bf78]">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">Lifestyle</h3>
+            <p class="text-white/50 font-light text-sm leading-relaxed">Disciplina deportiva y curiosidad musical constante. Creo en el equilibrio para mantener la creatividad.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @reference "../style/global.css";
+  
+  /* Animación suave para la entrada de la imagen */
+  h1 {
+    animation: slideUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

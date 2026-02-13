@@ -1,5 +1,4 @@
 ---
-import TitleSecundary from "./TitleSecundary.astro";
 
 // Skills.astro
 const skills = [
@@ -22,10 +21,10 @@ const skills = [
 const doubleSkills = [...skills, ...skills];
 ---
 
-<section id="skills" class="overflow-hidden pt-10 z-50">
-  <TitleSecundary h2="Conocimientos" span="Stack Tecnológico"/>
+<section id="skills" class="overflow-hidden z-50">
+  
 
-  <div class="relative flex overflow-x-hidden group/marquee mt-10">
+  <div class="relative flex overflow-x-hidden group/marquee">
     <div class="py-12 animate-marquee flex whitespace-nowrap gap-12 items-center main-marquee" style="will-change: transform; backface-visibility: hidden;">
       {doubleSkills.map((skill) => (
         <div class="skill-card relative flex flex-col items-center justify-center min-w-30 md:min-w-40 transition-all duration-500">
