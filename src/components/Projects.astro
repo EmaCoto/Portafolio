@@ -15,7 +15,7 @@ const projects = rawProjects
 ---
 
 <div class="w-full overflow-hidden">
-  <section id="projects-section" class="relative flex flex-col justify-center py-2 md:py-4 bg-[#0a0709]">
+  <section id="projects-section" class="relative flex flex-col justify-center py-2 md:py-4">
     <TitleSecundary h2="Proyectos" span="Trabajos Destacados" />
 
     <div class="projects-container relative flex items-center mt-4">
@@ -24,7 +24,7 @@ const projects = rawProjects
           <div class="flex flex-col">
             <a 
               href={`/projects/${project.slug}`}
-              class="project-card group relative min-w-[85vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[40vh] md:h-[55vh] block"
+              class="project-card group relative min-w-[85vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[40vh] md:h-[55vh] block overflow-hidden"
             >
               <img 
                 src={project.image} 
@@ -32,18 +32,21 @@ const projects = rawProjects
                 class="absolute inset-0 w-full h-full object-cover blur-3xl opacity-30 scale-110 z-0"
               />
 
-              <div class="absolute inset-0 z-20 bg-linear-to-t from-[#0a0709] via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-60"></div>
+              <div class="absolute inset-0 z-20 via-transparent to-transparent opacity-80 transition-opacity"></div>
 
               <img 
                 src={project.image} 
                 alt={project.title} 
                 class="project-img relative z-10 w-full h-full object-contain 
-                       opacity-100 grayscale-0 
-                       md:opacity-60 md:grayscale md:group-hover:grayscale-0 md:group-hover:opacity-100 
-                       transition-all duration-500"
+                       /* MÓVIL: Siempre color y tamaño completo */
+                       opacity-100 grayscale-0 scale-100
+                       /* PC: Inicia opaca, gris y pequeña; agranda en hover */
+                       md:opacity-60 md:grayscale md:scale-90 
+                       md:group-hover:grayscale-0 md:group-hover:opacity-100 md:group-hover:scale-105
+                       transition-all duration-700 ease-out"
               />
 
-              <div class="absolute bottom-0 left-0 p-5 z-30 transition-transform duration-500 group-hover:-translate-y-2">
+              <div class="absolute bottom-0 left-0 p-5 z-30 transition-transform duration-500 md:group-hover:-translate-y-2">
                 <p class="text-[#72bf78] font-mono text-[10px] mb-1 tracking-[0.2em] uppercase">{project.category}</p>
                 <h3 class="text-white text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight italic">
                   {project.title}
@@ -78,7 +81,7 @@ const projects = rawProjects
         trigger: section,
         pin: true,
         scrub: 1,
-        start: "top 10%", // Ajustado para menos espacio arriba
+        start: "top 10%",
         end: () => "+=" + wrapper.scrollWidth,
         invalidateOnRefresh: true,
       }
@@ -91,4 +94,6 @@ const projects = rawProjects
 
 <style>
   #projects-section { will-change: transform; }
+  /* Asegura que el zoom no se salga de la "caja" invisible */
+  .project-card { backface-visibility: hidden; }
 </style>
