@@ -12,10 +12,10 @@ const education = [
 ];
 ---
 
-<section id="formation" class="relative w-full py-5 overflow-hidden">
+<section id="formation" class="relative w-full py-5 mt-10 overflow-hidden">
   <TitleSecundary h2="Formación" span="Mi Trayectoria" />
 
-  <div class="relative max-w-6xl mx-auto mt-20 px-4 min-h-375">
+  <div class="relative max-w-6xl mx-auto mt-10 md:mt-20 px-4">
     
     <svg
       class="absolute inset-0 h-full w-full z-0 pointer-events-none"
@@ -50,15 +50,16 @@ const education = [
       />
     </svg>
 
-    <div class="relative flex flex-col space-y-32">
+    <div class="relative flex flex-col space-y-12 md:space-y-32 pb-10">
       {education.map((item) => (
         <div class={`edu-item flex w-full ${item.side === 'left' ? 'md:justify-start' : 'md:justify-end'} justify-center`}>
           
-          <div class={`group relative p-1 rounded-2xl transition-all duration-500 hover:scale-[1.02]`}>
-            <div class="absolute inset-0 bg-linear-to-br from-[#72bf78]/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="group relative p-1 rounded-2xl transition-all duration-500 md:hover:scale-[1.02] w-full max-w-[320px] md:max-w-none md:w-87.5">
             
-            <div class="relative bg-[#0d0d0d] border border-white/10 p-6 md:p-8 rounded-2xl w-75 md:w-87.5 overflow-hidden">
-              <div class="absolute top-0 right-0 w-12 h-12 bg-[#72bf78]/10 rounded-bl-full -mr-6 -mt-6 group-hover:bg-[#72bf78]/20 transition-colors"></div>
+            <div class="absolute inset-0 bg-linear-to-br from-[#72bf78]/20 to-transparent rounded-2xl opacity-0 md:group-hover:opacity-100 transition-opacity"></div>
+            
+            <div class="relative bg-[#0d0d0d] border border-white/10 p-6 md:p-8 rounded-2xl h-full overflow-hidden">
+              <div class="absolute top-0 right-0 w-12 h-12 bg-[#72bf78]/10 rounded-bl-full -mr-6 -mt-6 md:group-hover:bg-[#72bf78]/20 transition-colors"></div>
               
               <div class="flex items-center gap-3 mb-4">
                 <span class="px-3 py-1 bg-[#72bf78]/10 text-[#72bf78] font-mono text-[10px] rounded-full border border-[#72bf78]/20">
@@ -67,7 +68,7 @@ const education = [
                 <div class="h-px flex-1 bg-white/10"></div>
               </div>
 
-              <h3 class="text-white font-black text-xl md:text-2xl uppercase tracking-tighter mb-2 group-hover:text-[#72bf78] transition-colors italic">
+              <h3 class="text-white font-black text-xl md:text-2xl uppercase tracking-tighter mb-2 md:group-hover:text-[#72bf78] transition-colors italic">
                 {item.title}
               </h3>
               <p class="text-neutral-400 font-light text-sm md:text-base border-l-2 border-[#72bf78]/30 pl-4">
@@ -101,7 +102,6 @@ const education = [
     const length = mainPath.getTotalLength();
     gsap.set(mainPath, { strokeDasharray: length, strokeDashoffset: length });
 
-    // Animación de la línea
     gsap.to(mainPath, {
       strokeDashoffset: 0,
       ease: "none",
@@ -113,17 +113,17 @@ const education = [
       }
     });
 
-    // Animación de Cards
     const items = document.querySelectorAll(".edu-item");
     items.forEach((item) => {
       gsap.from(item, {
-        x: item.classList.contains('md:justify-start') ? -50 : 50,
+        x: window.innerWidth > 768 ? (item.classList.contains('md:justify-start') ? -50 : 50) : 0,
+        y: window.innerWidth <= 768 ? 20 : 0,
         opacity: 0,
         filter: "blur(10px)",
         scrollTrigger: {
           trigger: item,
-          start: "top 80%",
-          end: "top 50%",
+          start: "top 85%",
+          end: "top 60%",
           scrub: true,
         }
       });
@@ -135,25 +135,26 @@ const education = [
 </script>
 
 <style>
-  /* Efecto de Scan en el fondo de las cards */
-  .group::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent, rgba(114, 191, 120, 0.05), transparent);
-    transform: translateY(-100%);
-    transition: transform 0.6s;
-  }
-  .group:hover::after {
-    transform: translateY(100%);
+  /* Scan solo en desktop */
+  @media (min-width: 768px) {
+    .group::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(114, 191, 120, 0.05), transparent);
+      transform: translateY(-100%);
+      transition: transform 0.6s;
+    }
+    .group:hover::after {
+      transform: translateY(100%);
+    }
   }
 
-  /* Responsive para el SVG */
   @media (max-width: 768px) {
     svg {
       width: 200%;
       left: -50%;
-      opacity: 0.2;
+      opacity: 0.15;
     }
   }
 </style>

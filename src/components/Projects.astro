@@ -2,45 +2,49 @@
 import { getCollection } from "astro:content";
 import TitleSecundary from "./TitleSecundary.astro";
 
-// Obtenemos todos los proyectos de la colección 'projects'
 const rawProjects = await getCollection("projects");
 
-// Ordenamos por fecha y los preparamos para el diseño
 const projects = rawProjects
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .map(project => ({
     title: project.data.title,
     category: project.data.category,
-    // Usamos la misma lógica que en el blog para evitar errores de TypeScript
     image: typeof project.data.image === 'string' ? project.data.image : (project.data.image as any)?.src,
     slug: project.slug
   }));
 ---
 
 <div class="w-full overflow-hidden">
-  <section id="projects-section" class="relative min-h-[90vh] flex flex-col justify-center py-5 md:py-20">
+  <section id="projects-section" class="relative flex flex-col justify-center py-2 md:py-4 bg-[#0a0709]">
     <TitleSecundary h2="Proyectos" span="Trabajos Destacados" />
 
-    <div class="projects-container relative  flex items-center">
-      <div class="projects-wrapper flex gap-6 md:gap-12 px-[5vw] md:px-[10vw]">
-        {projects.map((project, index) => (
-          <div class="flex flex-col gap-x-4">
-            {/* <span class="text-[#72bf78] font-mono text-xs opacity-50">0{index + 1}</span> */}
-            
+    <div class="projects-container relative flex items-center mt-4">
+      <div class="projects-wrapper flex gap-4 md:gap-10 px-[5vw] md:px-[10vw]">
+        {projects.map((project) => (
+          <div class="flex flex-col">
             <a 
               href={`/projects/${project.slug}`}
-              class="project-card group relative min-w-[80vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[45vh] md:h-[55vh] overflow-hidden rounded-xl  block"
+              class="project-card group relative min-w-[85vw] sm:min-w-[50vw] md:min-w-[45vw] lg:min-w-[35vw] h-[40vh] md:h-[55vh] block"
             >
-              <div class="absolute inset-0 z-20 bg-linear-to-t from-[#0a0709] via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity"></div>
+              <img 
+                src={project.image} 
+                aria-hidden="true"
+                class="absolute inset-0 w-full h-full object-cover blur-3xl opacity-30 scale-110 z-0"
+              />
+
+              <div class="absolute inset-0 z-20 bg-linear-to-t from-[#0a0709] via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-60"></div>
 
               <img 
                 src={project.image} 
                 alt={project.title} 
-                class="project-img absolute inset-0 w-full h-full object-cover scale-110 transition-transform duration-1000 group-hover:scale-100 opacity-50 group-hover:opacity-100 grayscale group-hover:grayscale-0"
+                class="project-img relative z-10 w-full h-full object-contain 
+                       opacity-100 grayscale-0 
+                       md:opacity-60 md:grayscale md:group-hover:grayscale-0 md:group-hover:opacity-100 
+                       transition-all duration-500"
               />
 
-              <div class="absolute bottom-0 left-0 p-6 md:p-8 z-30 transition-transform duration-500 group-hover:-translate-y-2">
-                <p class="text-[#72bf78] font-mono text-[10px] md:text-xs mb-1 tracking-[0.2em] uppercase">{project.category}</p>
+              <div class="absolute bottom-0 left-0 p-5 z-30 transition-transform duration-500 group-hover:-translate-y-2">
+                <p class="text-[#72bf78] font-mono text-[10px] mb-1 tracking-[0.2em] uppercase">{project.category}</p>
                 <h3 class="text-white text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight italic">
                   {project.title}
                 </h3>
@@ -65,10 +69,8 @@ const projects = rawProjects
 
     if (!section || !wrapper) return;
 
-    // Matamos cualquier instancia previa para evitar errores en navegación Astro (View Transitions)
     ScrollTrigger.getAll().filter(st => st.trigger === section).forEach(st => st.kill());
 
-    // Animación horizontal
     gsap.to(wrapper, {
       x: () => -(wrapper.scrollWidth - window.innerWidth + window.innerWidth * 0.05),
       ease: "none",
@@ -76,40 +78,17 @@ const projects = rawProjects
         trigger: section,
         pin: true,
         scrub: 1,
-        start: "top top", 
+        start: "top 10%", // Ajustado para menos espacio arriba
         end: () => "+=" + wrapper.scrollWidth,
         invalidateOnRefresh: true,
       }
     });
-
-    // Tilt suave
-    const cards = document.querySelectorAll(".project-card");
-    cards.forEach(card => {
-      card.addEventListener("mousemove", (e: any) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-        gsap.to(card, {
-          rotationY: x * 5,
-          rotationX: -y * 5,
-          duration: 0.5,
-          ease: "power2.out"
-        });
-      });
-
-      card.addEventListener("mouseleave", () => {
-        gsap.to(card, { rotationY: 0, rotationX: 0, duration: 0.5 });
-      });
-    });
   };
 
-  // Ejecutar al cargar y tras cambios de página
   initProjects();
   document.addEventListener("astro:after-swap", initProjects);
 </script>
 
 <style>
   #projects-section { will-change: transform; }
-  .project-card { transform-style: preserve-3d; perspective: 1000px; }
 </style>
