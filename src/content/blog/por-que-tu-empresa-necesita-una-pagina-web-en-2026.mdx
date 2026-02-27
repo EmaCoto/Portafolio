@@ -6,6 +6,8 @@ tags: ["Estrategia Digital", "Desarrollo Web", "Crecimiento"]
 heroImage: "/blog/portada-por-qué-tu-empresa-necesita-una-página-web-en-2026.webp"
 ---
 
+import CtaFinal from "../../components/blog/CtaFinal.astro";
+
 <article class="w-full max-w-5xl mx-auto py-10 text-white">
 
   {/* Introducción Impactante */}
@@ -77,21 +79,62 @@ heroImage: "/blog/portada-por-qué-tu-empresa-necesita-una-página-web-en-2026.w
     </div>
   </div>
 
-  {/* CTA Final */}
-  <section class="mt-24 p-1 rounded-3xl bg-linear-to-br from-[#72BF78] via-white to-[#72BF78]">
-    <div class="bg-slate-900 rounded-[calc(1.5rem-1px)] p-10 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-        ¿Listo para llevar tu negocio al siguiente nivel?
-      </h2>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/contact" class="px-8 py-4 bg-[#72BF78] text-white font-bold rounded-full hover:bg-white hover:text-[#72BF78] transition-all transform hover:scale-105 shadow-xl">
-          Empezar mi proyecto ahora
-        </a>
-        <a href="https://wa.link/pa3hoa" class="px-8 py-4 border border-slate-700 text-white font-bold rounded-full hover:bg-slate-800 transition-all">
-          Hablemos por WhatsApp
-        </a>
-      </div>
+  {/* Sección FAQ */}
+  <section class="mt-24">
+    <h2 class="text-3xl font-black uppercase italic tracking-tighter mb-10 text-[#72BF78]">Preguntas Frecuentes</h2>
+    <div class="space-y-4">
+      <details class="group bg-slate-800/30 rounded-2xl border border-white/5 overflow-hidden">
+        <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+          <span class="font-bold text-lg">¿Cuánto tiempo tarda en estar lista una web?</span>
+          <span class="text-[#72BF78] transition-transform group-open:rotate-180">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </span>
+        </summary>
+        <div class="p-6 pt-0 text-white/80 font-light">
+          Depende de la complejidad, pero una herramienta de captación de alto rendimiento suele estar operativa entre 2 a 4 semanas.
+        </div>
+      </details>
+
+      <details class="group bg-slate-800/30 rounded-2xl border border-white/5 overflow-hidden">
+        <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+          <span class="font-bold text-lg">¿Mi página funcionará en celulares?</span>
+          <span class="text-[#72BF78] transition-transform group-open:rotate-180">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </span>
+        </summary>
+        <div class="p-6 pt-0 text-white/80 font-light">
+          Absolutamente. El 70% del tráfico actual es móvil; diseño webs bajo la filosofía "Mobile First" para garantizar velocidad y claridad en cualquier pantalla.
+        </div>
+      </details>
+
+      <details class="group bg-slate-800/30 rounded-2xl border border-white/5 overflow-hidden">
+        <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+          <span class="font-bold text-lg">¿Necesito conocimientos técnicos para manejarla?</span>
+          <span class="text-[#72BF78] transition-transform group-open:rotate-180">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </span>
+        </summary>
+        <div class="p-6 pt-0 text-white/80 font-light">
+          No. Entrego soluciones autogestionables o servicios de mantenimiento integral para que tú solo te preocupes por atender a los nuevos clientes.
+        </div>
+      </details>
+
+      <details class="group bg-slate-800/30 rounded-2xl border border-white/5 overflow-hidden">
+        <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+          <span class="font-bold text-lg">¿Apareceré en Google de inmediato?</span>
+          <span class="text-[#72BF78] transition-transform group-open:rotate-180">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </span>
+        </summary>
+        <div class="p-6 pt-0 text-white/80 font-light">
+          Implemento SEO técnico desde la primera línea de código para facilitar que Google te indexe rápido y empieces a escalar posiciones orgánicamente.
+        </div>
+      </details>
     </div>
   </section>
+
+
+  <CtaFinal titleH2="¿Listo para llevar tu negocio al siguiente nivel?" />
+
 
 </article>
