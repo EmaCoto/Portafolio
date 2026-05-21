@@ -4,6 +4,7 @@ import miFoto from '../../public/img/photo-emanuel-cortes-ochoa.webp';
 import miFoto2 from '../../public/img/photo-performace-pagespeed.webp';
 import SkillsAboutMe from "../components/SkillsAboutMe.astro";
 import Layout from "../layouts/Layout.astro";
+import CodeBracket from "../components/animated-icons/CodeBracket.astro";
 
 // LÓGICA PARA LA EDAD AUTOMÁTICA
 const birthDate = new Date('2004-05-06');
@@ -105,7 +106,7 @@ const description = "Desarrollador Full Stack de Medellín, Colombia. Especialis
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="p-8 rounded-xl bg-white/2 bg-linear-to-br from-white/5 to-transparent border border-white/5">
             <div class="w-10 h-10 bg-[#72bf78]/10 rounded-lg flex items-center justify-center mb-6 text-[#72bf78]">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <CodeBracket size={25} strokeWidth={2} />
             </div>
             <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">Desarrollo</h3>
             <p class="text-white/50 font-light text-sm leading-relaxed">Experticia en el stack moderno: React, Next.js, Astro, y arquitecturas escalables de Backend.</p>

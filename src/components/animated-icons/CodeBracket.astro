@@ -1,0 +1,111 @@
+---
+const {
+  className = "",
+  size = 260,
+  strokeWidth = 3,
+} = Astro.props;
+---
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" 
+    class={`code-bracket-icon ${className}`}
+    data-animated="true"
+    width={size}
+    height={size}
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.5" 
+    role="img"
+    aria-label="Code bracket icon"
+>
+    <path class="draw" d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" 
+        stroke="#72bf78"
+        stroke-width={strokeWidth}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+</svg> -->
+
+
+<svg xmlns="http://www.w3.org/2000/svg"
+    class={`code-bracket-icon ${className}`}
+    data-animated="true"
+    width={size}
+    height={size}
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke-width="1.5" 
+    role="img"
+    aria-label="Code bracket icon"
+>
+    <path class="draw" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" 
+        stroke="#72bf78"
+        stroke-width={strokeWidth}
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
+</svg>
+
+
+
+
+<script>
+  const icons = document.querySelectorAll<SVGSVGElement>(
+    '.code-bracket-icon[data-animated="true"]'
+  );
+
+  // Configuramos el observador para detectar cuándo entra en pantalla
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const icon = entry.target as SVGSVGElement;
+        const paths = icon.querySelectorAll<SVGGeometryElement>('.draw');
+
+        paths.forEach((path) => {
+          const length = path.getTotalLength();
+          // Inicializamos el trazo oculto antes de que empiece la animación
+          path.style.strokeDasharray = `${length}`;
+          path.style.strokeDashoffset = `${length}`;
+        });
+
+        // Añadimos la clase que dispara la animación en CSS
+        icon.classList.add('is-visible');
+        
+        // Dejamos de observar este icono para que no se repita la animación al hacer scroll de nuevo
+        observer.unobserve(icon);
+      }
+    });
+  }, {
+    threshold: 0.5 // El icono debe estar visible al menos un 50% en pantalla para activarse
+  });
+
+  icons.forEach((icon) => observer.observe(icon));
+</script>
+
+<style>
+  .code-bracket-icon {
+    display: block;
+    overflow: visible;
+  }
+
+  /* La animación SOLO se activa cuando el JS añade la clase '.is-visible' */
+  .code-bracket-icon.is-visible .draw {
+    animation-name: drawLine;
+    animation-duration: 4s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-delay: 1s; /* <--- Aquí están tus 2 segundos de espera */
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .code-bracket-icon .draw {
+      animation: none !important;
+      stroke-dashoffset: 0 !important;
+    }
+  }
+</style>
