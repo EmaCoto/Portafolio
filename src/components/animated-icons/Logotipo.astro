@@ -1,0 +1,101 @@
+---
+const {
+  className = "",
+  size = 260,
+  // strokeWidth ya no es necesario ya que el trazo es de relleno y no de borde
+} = Astro.props;
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" 
+    class={`logotipo-icon ${className}`}
+    data-animated="true"
+    width={size}
+    height={size}
+    fill="none" 
+    viewBox="0 0 24 24" 
+    role="img"
+    aria-label="Logotipo icon"
+>
+    <!-- EL RELLENO EN ZIG-ZAG: Ajustado para llenar la forma rectangular -->
+    <path class="draw line-fill" d="M1 2.5h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22v.7H1v.7h22V21.5"
+        stroke="#72bf78"
+        stroke-width="0.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        mask="url(#standard-mask)"
+    />
+
+    <defs>
+        <mask id="standard-mask">
+            <!-- La silueta del CUADRADO con bordes suavemente redondeados en blanco -->
+            <rect x="2" y="2" width="20" height="20" rx="2" ry="2" fill="#FFFFFF" />
+            <!-- El calado de la letra E en negro (área que no se dibuja) -->
+            <path d="M9.5 7.5h5v2.2h-2.6v1.4h2.2v2h-2.2v1.4h2.8v2.2h-5.2V7.5Z" fill="#000000" />
+        </mask>
+    </defs>
+</svg>
+
+<script>
+    // Creamos la función que inicializa y observa los íconos
+    function initLogotipoAnimation() {
+        const icons = document.querySelectorAll<SVGSVGElement>(
+        '.logotipo-icon[data-animated="true"]'
+        );
+
+        const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+            const icon = entry.target as SVGSVGElement;
+            const paths = icon.querySelectorAll<SVGGeometryElement>('.draw');
+
+            paths.forEach((path) => {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = `${length}`;
+                path.style.strokeDashoffset = `${length}`;
+            });
+
+            icon.classList.add('is-visible');
+            observer.unobserve(icon);
+            }
+        });
+        }, {
+        threshold: 0.5
+        });
+
+        icons.forEach((icon) => observer.observe(icon));
+    }
+
+    // 1. Se ejecuta en la primera carga tradicional de la página
+    document.addEventListener('DOMContentLoaded', initLogotipoAnimation);
+
+    // 2. Se ejecuta CADA VEZ que cambias de página con View Transitions / Router de Astro
+    document.addEventListener('astro:page-load', initLogotipoAnimation);
+</script>
+
+<style>
+  .logotipo-icon {
+    display: block;
+    overflow: visible;
+  }
+
+  .logotipo-icon.is-visible .draw {
+    animation-name: drawLine;
+    animation-duration: 3.5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-delay: 1s; 
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logotipo-icon .draw {
+      animation: none !important;
+      stroke-dashoffset: 0 !important;
+    }
+  }
+</style>

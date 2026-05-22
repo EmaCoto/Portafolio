@@ -7,7 +7,7 @@ const {
 ---
 
 <svg xmlns="http://www.w3.org/2000/svg" 
-    class={`code-bracket-icon ${className}`}
+    class={`arrow-trending-up-icon ${className}`}
     data-animated="true"
     width={size}
     height={size}
@@ -15,9 +15,9 @@ const {
     viewBox="0 0 24 24" 
     stroke-width="1.5" 
     role="img"
-    aria-label="Code bracket icon"
+    aria-label="Arrow trending up icon"
 >
-    <path class="draw" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" 
+    <path class="draw" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
         stroke="#72bf78"
         stroke-width={strokeWidth}
         stroke-linecap="round"
@@ -26,8 +26,8 @@ const {
 </svg>
 
 <script>
-  function initCodeAnimation() {
-    // Captura global de cualquier SVG animado activo en el DOM actual
+  function initTrendingAnimation() {
+    // Captura cualquier SVG animado de forma global en la página actual
     const icons = document.querySelectorAll<SVGSVGElement>('svg[data-animated="true"]');
 
     const observer = new IntersectionObserver((entries) => {
@@ -53,18 +53,18 @@ const {
     icons.forEach((icon) => observer.observe(icon));
   }
 
-  // Asegura la ejecución tanto en carga dura como en transiciones entre páginas SPA de Astro
-  document.addEventListener('DOMContentLoaded', initCodeAnimation);
-  document.addEventListener('astro:page-load', initCodeAnimation);
+  // Escucha los eventos de ciclo de vida nativos de Astro
+  document.addEventListener('DOMContentLoaded', initTrendingAnimation);
+  document.addEventListener('astro:page-load', initTrendingAnimation);
 </script>
 
 <style>
-  .code-bracket-icon {
+  .arrow-trending-up-icon {
     display: block;
     overflow: visible;
   }
 
-  .code-bracket-icon.is-visible .draw {
+  .arrow-trending-up-icon.is-visible .draw {
     animation-name: drawLine;
     animation-duration: 4s;
     animation-timing-function: ease;
@@ -79,7 +79,7 @@ const {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .code-bracket-icon .draw {
+    .arrow-trending-up-icon .draw {
       animation: none !important;
       stroke-dashoffset: 0 !important;
     }

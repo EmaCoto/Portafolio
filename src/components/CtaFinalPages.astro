@@ -1,0 +1,30 @@
+---
+import Whatsapp from './animated-icons/whatsapp.astro';
+
+interface Props {
+    titleH2: string;
+}
+
+const { titleH2 } = Astro.props;
+
+---
+
+{/* CTA Final */}
+<section class="mt-12 p-1 rounded-lg bg-linear-to-br from-[#72BF78] via-white to-[#72BF78]">
+    <div class="rounded-[calc(1.5rem-1px)] p-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+            {titleH2}   
+        </h2>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="/contact" class="px-8 py-4 bg-[#72BF78] border border-[#72BF78] font-bold rounded-md transition duration-150 ease-in-out hover:scale-105 shadow-xl">
+                Empezar mi proyecto ahora
+            </a>
+            <div class="px-8 flex gap-3 py-4 border border-slate-700 font-bold rounded-md transition duration-150 ease-in-out hover:scale-105">
+                <a href="https://wa.link/pa3hoa" class="flex items-center gap-2">
+                    <Whatsapp size={25} strokeWidth={1} />
+                    Hablemos por WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

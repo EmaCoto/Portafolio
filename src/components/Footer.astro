@@ -1,4 +1,6 @@
 ---
+import Logotipo from "./animated-icons/Logotipo.astro";
+
 const currentYear = new Date().getFullYear();
 
 const socialLinks = [
@@ -38,8 +40,8 @@ const quickLinks = [
 
       <div class="flex flex-col items-start md:items-end w-full md:w-auto">
         <a href="/" id="footer-logo" class="group flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#72bf78] rounded-xl flex items-center justify-center -rotate-3 group-hover:rotate-12 transition-all">
-            <span class="text-[#0a0709] font-black text-xl sm:text-2xl">E</span>
+          <div class="-rotate-3 group-hover:rotate-12 transition-all">
+            <Logotipo size={60} strokeWidth={1} />
           </div>
           <span class="text-white font-black tracking-tighter text-xl sm:text-2xl uppercase italic">Emanuel Cortes<span class="text-[#72bf78]">.</span></span>
         </a>

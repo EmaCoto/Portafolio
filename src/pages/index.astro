@@ -1,11 +1,12 @@
 ---
-import CtaFinal from '../components/blog/CtaFinal.astro';
+import CtaFinal from '../components/CtaFinalPages.astro';
 import BlogCarousel from '../components/BlogCarousel.astro';
 import Formation from '../components/Formation.astro';
 import HomeInfo from '../components/HomeInfo.astro';
 import Projects from '../components/Projects.astro';
 import Skills from '../components/Skills.astro';
 import Layout from '../layouts/Layout.astro';
+import CtaFinalPages from '../components/CtaFinalPages.astro';
 
 const title = "Emanuel Cortes | Desarrollo Full Stack y SEO";
 const description = "Desarrollo herramientas de captación de clientes de alto rendimiento. No hago simples webs; diseño sistemas técnicos optimizados en SEO que escalan tu negocio.";
@@ -19,6 +20,6 @@ const description = "Desarrollo herramientas de captación de clientes de alto r
 	<Formation />
 	<BlogCarousel />
 	<div class="max-w-7xl mx-auto">
-		<CtaFinal titleH2="¿Listo para llevar tu negocio al siguiente nivel?" />
+		<CtaFinalPages titleH2="¿Listo para llevar tu negocio al siguiente nivel?" />
 	</div>
 </Layout>

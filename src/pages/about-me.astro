@@ -5,6 +5,10 @@ import miFoto2 from '../../public/img/photo-performace-pagespeed.webp';
 import SkillsAboutMe from "../components/SkillsAboutMe.astro";
 import Layout from "../layouts/Layout.astro";
 import CodeBracket from "../components/animated-icons/CodeBracket.astro";
+import ArrowTrendingUp from "../components/animated-icons/ArrowTrendingUp.astro";
+import Heart from '../components/animated-icons/Heart.astro';
+import CtaFinalPages from '../components/CtaFinalPages.astro';
+
 
 // LÓGICA PARA LA EDAD AUTOMÁTICA
 const birthDate = new Date('2004-05-06');
@@ -109,12 +113,12 @@ const description = "Desarrollador Full Stack de Medellín, Colombia. Especialis
                 <CodeBracket size={25} strokeWidth={2} />
             </div>
             <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">Desarrollo</h3>
-            <p class="text-white/50 font-light text-sm leading-relaxed">Experticia en el stack moderno: React, Next.js, Astro, y arquitecturas escalables de Backend.</p>
+            <p class="text-white/50 font-light text-sm leading-relaxed">Experticia en el stack moderno: Laravel, Tailwind CSS, Astro, y arquitecturas escalables de Backend.</p>
         </div>
 
         <div class="p-8 rounded-xl bg-white/2 bg-linear-to-br from-white/5 to-transparent border border-white/5">
             <div class="w-10 h-10 bg-[#72bf78]/10 rounded-lg flex items-center justify-center mb-6 text-[#72bf78]">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <ArrowTrendingUp size={25} strokeWidth={2} />
             </div>
             <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">SEO Técnico</h3>
             <p class="text-white/50 font-light text-sm leading-relaxed">Optimización de Core Web Vitals, indexación semántica y estructuración de datos avanzada.</p>
@@ -122,7 +126,7 @@ const description = "Desarrollador Full Stack de Medellín, Colombia. Especialis
 
         <div class="p-8 rounded-xl bg-white/2 bg-linear-to-br from-white/5 to-transparent border border-white/5">
             <div class="w-10 h-10 bg-[#72bf78]/10 rounded-lg flex items-center justify-center mb-6 text-[#72bf78]">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <Heart size={25} strokeWidth={2} />
             </div>
             <h3 class="text-white font-black italic uppercase tracking-tighter text-xl mb-4">Lifestyle</h3>
             <p class="text-white/50 font-light text-sm leading-relaxed">Disciplina deportiva y curiosidad musical constante. Creo en el equilibrio para mantener la creatividad.</p>
@@ -130,6 +134,10 @@ const description = "Desarrollador Full Stack de Medellín, Colombia. Especialis
       </div>
 
     </div>
+
+    <div class="max-w-7xl mx-auto">
+		<CtaFinalPages titleH2="¿Listo para llevar tu negocio al siguiente nivel?" />
+	</div>
   </section>
 </Layout>
 

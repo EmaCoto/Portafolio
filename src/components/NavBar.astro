@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import Logotipo from "./animated-icons/Logotipo.astro";
 
 const allProjects = await getCollection("projects");
 const categories = [...new Set(allProjects.map(p => p.data.category))];
@@ -28,8 +29,8 @@ const skills = [
   <div class="max-w-7xl mx-auto flex justify-between items-center px-6 relative z-120">
     
     <a href="/" class="group flex items-center gap-2">
-      <div class="w-10 h-10 bg-[#72bf78] rounded-lg flex items-center justify-center rotate-3 group-hover:rotate-360 transition-all duration-700">
-        <span class="text-[#0a0709] font-black text-xl">E</span>
+      <div class="rotate-3 group-hover:rotate-360 transition-all duration-700">
+        <Logotipo size={50} strokeWidth={1} />
       </div>
       <span class="text-white font-black tracking-tighter text-xl italic group-hover:text-[#72bf78] transition-colors underline-offset-4">
         Emanuel Cortes<span class="text-[#72bf78]">.</span>

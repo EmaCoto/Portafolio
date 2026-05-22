@@ -26,36 +26,36 @@ const {
 </svg>
 
 <script>
-  const icons = document.querySelectorAll<SVGSVGElement>(
-    '.arrow-right-icon[data-animated="true"]'
-  );
+  function initArrowAnimation() {
+    // Selector global para capturar este componente en cualquier página
+    const icons = document.querySelectorAll<SVGSVGElement>('svg[data-animated="true"]');
 
-  // Configuramos el observador para detectar cuándo entra en pantalla
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const icon = entry.target as SVGSVGElement;
-        const paths = icon.querySelectorAll<SVGGeometryElement>('.draw');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const icon = entry.target as SVGSVGElement;
+          const paths = icon.querySelectorAll<SVGGeometryElement>('.draw');
 
-        paths.forEach((path) => {
-          const length = path.getTotalLength();
-          // Inicializamos el trazo oculto antes de que empiece la animación
-          path.style.strokeDasharray = `${length}`;
-          path.style.strokeDashoffset = `${length}`;
-        });
+          paths.forEach((path) => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = `${length}`;
+            path.style.strokeDashoffset = `${length}`;
+          });
 
-        // Añadimos la clase que dispara la animación en CSS
-        icon.classList.add('is-visible');
-        
-        // Dejamos de observar este icono para que no se repita la animación al hacer scroll de nuevo
-        observer.unobserve(icon);
-      }
+          icon.classList.add('is-visible');
+          observer.unobserve(icon);
+        }
+      });
+    }, {
+      threshold: 0.5
     });
-  }, {
-    threshold: 0.5 // El icono debe estar visible al menos un 50% en pantalla para activarse
-  });
 
-  icons.forEach((icon) => observer.observe(icon));
+    icons.forEach((icon) => observer.observe(icon));
+  }
+
+  // Ejecuta en carga inicial y al navegar entre páginas de Astro
+  document.addEventListener('DOMContentLoaded', initArrowAnimation);
+  document.addEventListener('astro:page-load', initArrowAnimation);
 </script>
 
 <style>
@@ -64,13 +64,12 @@ const {
     overflow: visible;
   }
 
-  /* La animación SOLO se activa cuando el JS añade la clase '.is-visible' */
   .arrow-right-icon.is-visible .draw {
     animation-name: drawLine;
     animation-duration: 4s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
-    animation-delay: 1s; /* <--- Aquí están tus 2 segundos de espera */
+    animation-delay: 1s;
   }
 
   @keyframes drawLine {
